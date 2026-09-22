@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
+        Pokedex pokedex = new Pokedex();
         boolean running = true;
 
         //Kör Menu tills användaren stänger programmet
@@ -27,8 +28,18 @@ public class Main {
             String val = scan.nextLine();
 
             switch (val){
+                //CASE 1: LÄGG TILL ELEMENT, HP ETC TILL ELSE/FOR*
                 case "1":
-                    System.out.println("\nShow all Pokémon");
+                    System.out.println("\n=== All Pokémon ===");
+
+                    if (pokedex.getPokemon().isEmpty()){
+                        System.out.println("The Pokédex is empty...");
+                    }
+                    else{
+                        for  (Pokemon pokemon : pokedex.getPokemon()){
+                            System.out.println();
+                        }
+                    }
                     break;
 
                 case "2":
