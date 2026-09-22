@@ -28,7 +28,6 @@ public class Main {
             String val = scan.nextLine();
 
             switch (val){
-                //CASE 1: LÄGG TILL ELEMENT, HP ETC TILL ELSE/FOR*
                 case "1":
                     System.out.println("\n=== All Pokémon ===");
 
@@ -37,13 +36,76 @@ public class Main {
                     }
                     else{
                         for  (Pokemon pokemon : pokedex.getPokemon()){
-                            System.out.println();
+                            System.out.println(
+                                    pokemon.getName() +
+                                    " | Element: " + pokemon.getElement() +
+                                    " | HP: " + pokemon.getCurrentHp() +
+                                    "/" + pokemon.getMaxHp());
                         }
                     }
                     break;
 
                 case "2":
-                    System.out.println("\nAdd Pokémon");
+                    System.out.println("\n=== Add Pokémon ===");
+
+                    System.out.print("Name: ");
+                    String name = scan.nextLine();
+
+                    if (name.isBlank()){
+                        System.out.println("Name Cannot be empty");
+                        break;
+                    }
+
+                    System.out.print("Element: ");
+                    String inputElement = scan.nextLine();
+
+                    Element element;
+
+                    try{
+                        element = Element.valueOf(inputElement.toUpperCase());
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("Invalid Element.");
+                        break;
+                    }
+
+                    System.out.print("Max HP: ");
+                    int maxHp;
+
+                    try{
+                        maxHp = Integer.parseInt(scan.nextLine());
+
+                        if (maxHp <= 0){
+                            System.out.println("Max HP Must Be Greater Than 0.");
+                            break;
+                        }
+                    } catch (NumberFormatException e){
+                        System.out.println("Max HP Must Be A Number.");
+                        break;
+                    }
+
+                    System.out.print("Current HP: ");
+                    int currentHp;
+
+                    try{
+                        currentHp = Integer.parseInt(scan.nextLine());
+
+                        if (currentHp < 0){
+                            System.out.println("\nCurrent HP Cannot Be Negative.");
+                            break;
+                        }
+                        if (currentHp > maxHp){
+                            System.out.println("\nCurrent HP Cannot Be Higher Than Max HP.");
+                            break;
+                        }
+                    } catch (NumberFormatException e){
+                        System.out.println("\nCurrent HP Must Be A Number.");
+                        break;
+                    }
+
+                    Pokemon pokemon = new Pokemon(name, element, maxHp, currentHp);
+                    pokedex.addPokemon(pokemon);
+
+                    System.out.println("\nPokémon Added To The Pokédex!");
                     break;
 
                 case "3":
