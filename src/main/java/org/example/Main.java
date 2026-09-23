@@ -28,23 +28,22 @@ public class Main {
             //ANVÄNDARENS VAL
             String val = scan.nextLine();
 
-            switch (val){
+            switch (val) {
                 //Visa alla pokémon som finns i pokédexet
                 case "1":
                     System.out.println("\n=== All Pokémon ===");
 
                     //Kollar om litan är tom
-                    if (pokedex.getPokemon().isEmpty()){
+                    if (pokedex.getPokemon().isEmpty()) {
                         System.out.println("The Pokédex is empty...");
-                    }
-                    else{
+                    } else {
                         //Kollar igenom varje pokémon i pokédexet
-                        for  (Pokemon pokemon : pokedex.getPokemon()){
+                        for (Pokemon pokemon : pokedex.getPokemon()) {
                             System.out.println(
                                     pokemon.getName() +
-                                    " | Element: " + pokemon.getElement() +
-                                    " | HP: " + pokemon.getCurrentHp() +
-                                    "/" + pokemon.getMaxHp());
+                                            " | Element: " + pokemon.getElement() +
+                                            " | HP: " + pokemon.getCurrentHp() +
+                                            "/" + pokemon.getMaxHp());
                         }
                     }
                     break;
@@ -53,67 +52,151 @@ public class Main {
                 case "2":
                     System.out.println("\n=== Add Pokémon ===");
 
-                    System.out.print("Name: ");
-                    String name = scan.nextLine();
+                    //POKEMON NAMN
 
-                    //Kontrollerar att namnet inte är tomt
-                    if (name.isBlank()){
-                        System.out.println("Name Cannot be empty");
-                        break;
+                    String name;
+
+                    while (true){
+                        System.out.print("Name: ");
+                        name = scan.nextLine();
+
+                        if (name.isBlank()){
+                            System.out.println("Name cannot be empty, try again.");
+                        } else {
+                            break;
+                        }
                     }
 
-                    System.out.print("Element: ");
-                    String inputElement = scan.nextLine();
+                    // POKEMON ELEMENT
 
                     Element element;
 
-                    //Försöker omvandla2 användarens val till ett element
-                    try{
-                        element = Element.valueOf(inputElement.toUpperCase());
-                    } catch (IllegalArgumentException e) {
-                        System.out.println("Invalid Element.");
-                        break;
+                    while (true){
+                        System.out.println("Element: ");
+                        String chosenElement = scan.nextLine();
+
+                        try{
+                            element = Element.valueOf(chosenElement.toUpperCase());
+                            break;
+                        } catch (IllegalArgumentException e){
+                            System.out.println("Invalid Element. Try again.");
+                        }
                     }
 
-                    System.out.print("Max HP: ");
+                    // MAX HP
+
                     int maxHp;
 
-                    try{
-                        maxHp = Integer.parseInt(scan.nextLine());
+                    while (true){
+                        System.out.print("Max HP: ");
 
-                        if (maxHp <= 0){
-                            System.out.println("Max HP Must Be Greater Than 0.");
-                            break;
+                        try{
+                            maxHp = Integer.parseInt(scan.nextLine());
+
+                            if(maxHp <= 0){
+                                System.out.println("Max HP must be higher than 0.");
+                            } else {
+                                break;
+                            }
+                        } catch (NumberFormatException e){
+                            System.out.println("Max HP must be a number! Try again.");
                         }
-                    } catch (NumberFormatException e){
-                        System.out.println("Max HP Must Be An Even Number.");
-                        break;
                     }
 
-                    System.out.print("Current HP: ");
+                    //CURRENT HP
+
                     int currentHp;
 
-                    try{
-                        currentHp = Integer.parseInt(scan.nextLine());
+                    while (true){
+                        System.out.print("Current HP: ");
 
-                        if (currentHp < 0){
-                            System.out.println("\nCurrent HP Cannot Be Negative.");
-                            break;
+                        try{
+                            currentHp = Integer.parseInt(scan.nextLine());
+
+                            if (currentHp < 0){
+                                System.out.println("Current HP cannot be negative");
+                            } else if (currentHp > maxHp){
+                                System.out.println("Current HP cannot be higher than the Max HP");
+                            } else {
+                                break;
+                            }
+                        } catch (NumberFormatException e){
+                            System.out.println("Current HP has to be a number! Try again.");
                         }
-                        if (currentHp > maxHp){
-                            System.out.println("\nCurrent HP Cannot Be Higher Than Max HP.");
-                            break;
-                        }
-                    } catch (NumberFormatException e){
-                        System.out.println("\nCurrent HP Must Be An Even Number.");
-                        break;
                     }
 
+                    //SKAPA POKEMON
                     Pokemon pokemon = new Pokemon(name, element, maxHp, currentHp);
-                    pokedex.addPokemon(pokemon);
 
-                    System.out.println("\nPokémon Added To The Pokédex!");
-                    break;
+                    boolean addAnotherAttack = true;
+
+                    //Pokemon kan ha max 4 attacker
+                    while (pokemon.getAttacks().size() < 4 && addAnotherAttack){
+
+                        System.out.println("\n=== Add Attack ===");
+
+                        //ATTACK NAMN
+                        String attackName;
+
+                        while (true){
+                            System.out.print("Attack Name: ");
+                            attackName = scan.nextLine();
+
+                            if (attackName.isBlank()){
+                                System.out.println("Attack Name cannot be empty. Try again.");
+                            } else {
+                                break;
+                            }
+                        }
+
+                        // BASE DAMAGE
+                        int baseDamage;
+
+                        while (true){
+                            System.out.print("Base Damage: ");
+
+                            try{
+                                baseDamage = Integer.parseInt(scan.nextLine());
+
+                                if (baseDamage < 0){
+                                    System.out.println("Base Damage cannot be negative. Try again.");
+                                } else{
+                                    break;
+                                }
+                            } catch (NumberFormatException e){
+                                System.out.println("Base Damage must be a number! Try again");
+                            }
+                        }
+
+                        //ACCURACY
+                        int accuracy;
+
+                        while (true){
+                            System.out.print("Accuracy: ");
+
+                            try{
+                                accuracy = Integer.parseInt(scan.nextLine());
+
+                                if (accuracy < 0 || accuracy > 100){
+                                    System.out.println("Accuracy has to be between 0 - 100, try again");
+                                } else {
+                                    break;
+                                }
+                            } catch (NumberFormatException e){
+                                System.out.println("Accuracy has to be a number, try again!");
+                            }
+                        }
+
+                        // ATTACK ELEMENT
+
+                        // CREATE THE ATTACK
+
+                        // CHECK FOR MAX AMOUNT OF ATTACKS
+
+                        // ASK USER IF THEY WANT TO ADD ANOTHER ATTACK
+
+                        // UPDATE THE POKEDEX
+                    }
 
                 case "3":
                     System.out.println("\n=== Edit Pokémon ===");
