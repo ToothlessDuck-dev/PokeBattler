@@ -116,7 +116,141 @@ public class Main {
                     break;
 
                 case "3":
-                    System.out.println("\nEdit Pokémon");
+                    System.out.println("\n=== Edit Pokémon ===");
+
+                    //Kontrollera att pokédexet inte är tomt
+                    if (pokedex.getPokemon().isEmpty()){
+                        System.out.println("The Pokédex is empty..");
+                        break;
+                    }
+
+                    //Visar upp alla pokemon med ett nummer för användaren att välja enkelt
+                    for (int i = 0; i < pokedex.getPokemon().size(); i++){
+                        System.out.println(
+                                "[" + (i + 1) + "] " +
+                                pokedex.getPokemon().get(i).getName()
+                        );
+                    }
+
+                    System.out.print("Choose A Pokémon: ");
+                    int choice;
+
+                    //Kontrollera att användaren skrev ett nummer.
+                    try{
+                        choice = Integer.parseInt(scan.nextLine());
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please enter a number.");
+                        break;
+                    }
+
+                    //Kontroller at valet finns i listan
+                    if (choice < 1 || choice > pokedex.getPokemon().size()){
+                        System.out.println("Invalid Pokémon choice.");
+                        break;
+                    }
+
+                    //Hämtar Pokemon som användaren valde
+                    Pokemon selectedPokemon = pokedex.getPokemon().get(choice - 1);
+                    System.out.println("\nEditing: " + selectedPokemon.getName());
+
+                    System.out.println("[1] Change Name");
+                    System.out.println("[2] Change HP");
+                    System.out.println("[3] Change Element");
+                    System.out.println("[4] Add Attack");
+                    System.out.println("[5] Remove Attack");
+                    System.out.println("[6] Back");
+                    System.out.print("Choose an option: ");
+
+                    String editChoice = scan.nextLine();
+
+                    switch (editChoice){
+                        case "1":
+                            System.out.print("\nNew Name: ");
+                            String newName = scan.nextLine();
+
+                            if (newName.isBlank()){
+                                System.out.println("Name cannot be empty");
+                                break;
+                            }
+                            selectedPokemon.setName(newName);
+                            System.out.println("Pokémon name changed to: " + newName);
+                            break;
+
+                        case "2":
+                            System.out.print("New Max HP: ");
+                            int newMaxHp;
+
+                            try{
+                                newMaxHp = Integer.parseInt(scan.nextLine());
+
+                                if (newMaxHp <= 0){
+                                    System.out.println("Max HP must be greater than 0");
+                                    break;
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Max HP must be a number.");
+                                break;
+                            }
+
+                            System.out.print("New Current HP: ");
+                            int newCurrentHp;
+
+                            try {
+                                newCurrentHp = Integer.parseInt(scan.nextLine());
+
+                                if (newCurrentHp < 0){
+                                    System.out.println("Current HP cannot be negative.");
+                                    break;
+                                }
+
+                                if (newCurrentHp > newMaxHp){
+                                    System.out.println("\nCurrent HP cannot be higher than Max HP.");
+                                    break;
+                                }
+                            } catch (NumberFormatException e){
+                                System.out.println("\nCurrent HP must be a number!");
+                                break;
+                            }
+
+                            selectedPokemon.setMaxHp(newMaxHp);
+                            selectedPokemon.setCurrentHp(newCurrentHp);
+
+                            System.out.println("Pokémon HP changed!");
+
+                            break;
+
+                        case "3":
+                            System.out.print("\nNew Element: ");
+                            String newElementInput = scan.nextLine();
+
+                            Element newElement;
+
+                            try{
+                                newElement = Element.valueOf(newElementInput.toUpperCase());
+                            } catch (IllegalArgumentException e){
+                                System.out.println("Ivalid Element.");
+                                break;
+                            }
+
+                            selectedPokemon.setElement(newElement);
+                            System.out.println("\nPokémon Element Changed to: " + newElement);
+                            break;
+
+                        case "4":
+                            System.out.println("Add Attack");
+                            break;
+
+                        case "5":
+                            System.out.println("Remove Attack");
+                            break;
+
+                        case "6":
+                            break;
+
+                        default:
+                            System.out.println("Please Choose A Number From 1-6");
+                    }
+
                     break;
 
                 case "4":

@@ -54,17 +54,53 @@ public class Pokemon {
     public String getName(){
         return name;
     }
+    //ÄNDRA NAMN
+    public void setName(String name){
+
+        //Pokemon namn kan inte vara tomt
+        if (name == null || name.isBlank()){
+            throw new IllegalArgumentException("Pokémon name cannot be empty!");
+        }
+        this.name = name;
+    }
 
     public Element getElement(){
         return element;
+    }
+    //ÄNDRA POKEMONS ELEMENT
+    public void setElement(Element element){
+        this.element = element;
     }
 
     public int getMaxHp(){
         return maxHp;
     }
+    //ÄNDRA HP
+    public void setMaxHp(int maxHp){
+
+        //Max HP kan inte vara mindre än 0
+        if (maxHp <= 0){
+            throw new IllegalArgumentException("Max HP must be greater than 0!");
+        }
+        this.maxHp = maxHp;
+    }
 
     public int getCurrentHp(){
         return currentHp;
+    }
+    //Ändra Pokemons current HP
+    public void setCurrentHp(int currentHp){
+
+        //Current HP kan inte vara negativt
+        if (currentHp < 0){
+            throw new IllegalArgumentException("The Current HP cannot be negative!");
+        }
+
+        //Current HP kan inte vara högre än Max HP
+        if (currentHp > maxHp){
+            throw new IllegalArgumentException("The Current HP cannot be higher than Max HP!");
+        }
+        this.currentHp = currentHp;
     }
 
     public List<Attack> getAttacks(){
@@ -77,12 +113,10 @@ public class Pokemon {
         if (attacks.size() >= 4){
             throw new IllegalArgumentException("A Pokémon cannot have more than 4 attacks!");
         }
-
         //Pokémon ingen tom attack
         if (attack == null){
             throw new IllegalArgumentException("Attack cannot be empty!");
         }
-
         attacks.add(attack);
     }
 
