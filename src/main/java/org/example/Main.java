@@ -16,21 +16,21 @@ public class Main {
 
             //MENU VAL
             System.out.println("\n====== Pokédex =====");
-            System.out.println("[1] Show all Pokémon");
-            System.out.println("[2] Add Pokémon");
-            System.out.println("[3] Edit Pokémon");
-            System.out.println("[4] Delete Pokémon");
-            System.out.println("[5] Save to file");
-            System.out.println("[6] Load from file");
-            System.out.println("[7] Exit");
+            System.out.println("[1] Show all Pokémon"); // WORKS
+            System.out.println("[2] Add Pokémon"); // UPDATE
+            System.out.println("[3] Edit Pokémon"); // KIND OF WORKS
+            System.out.println("[4] Delete Pokémon"); // ADD
+            System.out.println("[5] Save to file"); // ADD
+            System.out.println("[6] Load from file"); // ADD
+            System.out.println("[7] Exit"); // WORKS
             System.out.print("Choose and option: ");
 
             //ANVÄNDARENS VAL
-            String val = scan.nextLine();
+            int userInput = InputHelper.readIntBetween(scan, "Choose an option: ", 1, 7);
 
-            switch (val) {
+            switch (userInput) {
                 //Visa alla pokémon som finns i pokédexet
-                case "1":
+                case 1:
                     System.out.println("\n=== All Pokémon ===");
 
                     //Kollar om litan är tom
@@ -41,164 +41,19 @@ public class Main {
                         for (Pokemon pokemon : pokedex.getPokemon()) {
                             System.out.println(
                                     pokemon.getName() +
-                                            " | Element: " + pokemon.getElement() +
-                                            " | HP: " + pokemon.getCurrentHp() +
-                                            "/" + pokemon.getMaxHp());
+                                    " | Element: " + pokemon.getElement() +
+                                    " | HP: " + pokemon.getCurrentHp() +
+                                    "/" + pokemon.getMaxHp());
                         }
                     }
                     break;
 
                 //Lägg till en pokémon till pokédexet, namn, element, max hp, current hp
-                case "2":
-                    System.out.println("\n=== Add Pokémon ===");
+                case 2:
+                    AddPokemon.add(scan,pokedex);
+                    break;
 
-                    //POKEMON NAMN
-
-                    String name;
-
-                    while (true){
-                        System.out.print("Name: ");
-                        name = scan.nextLine();
-
-                        if (name.isBlank()){
-                            System.out.println("Name cannot be empty, try again.");
-                        } else {
-                            break;
-                        }
-                    }
-
-                    // POKEMON ELEMENT
-
-                    Element element;
-
-                    while (true){
-                        System.out.println("Element: ");
-                        String chosenElement = scan.nextLine();
-
-                        try{
-                            element = Element.valueOf(chosenElement.toUpperCase());
-                            break;
-                        } catch (IllegalArgumentException e){
-                            System.out.println("Invalid Element. Try again.");
-                        }
-                    }
-
-                    // MAX HP
-
-                    int maxHp;
-
-                    while (true){
-                        System.out.print("Max HP: ");
-
-                        try{
-                            maxHp = Integer.parseInt(scan.nextLine());
-
-                            if(maxHp <= 0){
-                                System.out.println("Max HP must be higher than 0.");
-                            } else {
-                                break;
-                            }
-                        } catch (NumberFormatException e){
-                            System.out.println("Max HP must be a number! Try again.");
-                        }
-                    }
-
-                    //CURRENT HP
-
-                    int currentHp;
-
-                    while (true){
-                        System.out.print("Current HP: ");
-
-                        try{
-                            currentHp = Integer.parseInt(scan.nextLine());
-
-                            if (currentHp < 0){
-                                System.out.println("Current HP cannot be negative");
-                            } else if (currentHp > maxHp){
-                                System.out.println("Current HP cannot be higher than the Max HP");
-                            } else {
-                                break;
-                            }
-                        } catch (NumberFormatException e){
-                            System.out.println("Current HP has to be a number! Try again.");
-                        }
-                    }
-
-                    //SKAPA POKEMON
-                    Pokemon pokemon = new Pokemon(name, element, maxHp, currentHp);
-
-                    boolean addAnotherAttack = true;
-
-                    //Pokemon kan ha max 4 attacker
-                    while (pokemon.getAttacks().size() < 4 && addAnotherAttack){
-
-                        System.out.println("\n=== Add Attack ===");
-
-                        //ATTACK NAMN
-                        String attackName;
-
-                        while (true){
-                            System.out.print("Attack Name: ");
-                            attackName = scan.nextLine();
-
-                            if (attackName.isBlank()){
-                                System.out.println("Attack Name cannot be empty. Try again.");
-                            } else {
-                                break;
-                            }
-                        }
-
-                        // BASE DAMAGE
-                        int baseDamage;
-
-                        while (true){
-                            System.out.print("Base Damage: ");
-
-                            try{
-                                baseDamage = Integer.parseInt(scan.nextLine());
-
-                                if (baseDamage < 0){
-                                    System.out.println("Base Damage cannot be negative. Try again.");
-                                } else{
-                                    break;
-                                }
-                            } catch (NumberFormatException e){
-                                System.out.println("Base Damage must be a number! Try again");
-                            }
-                        }
-
-                        //ACCURACY
-                        int accuracy;
-
-                        while (true){
-                            System.out.print("Accuracy: ");
-
-                            try{
-                                accuracy = Integer.parseInt(scan.nextLine());
-
-                                if (accuracy < 0 || accuracy > 100){
-                                    System.out.println("Accuracy has to be between 0 - 100, try again");
-                                } else {
-                                    break;
-                                }
-                            } catch (NumberFormatException e){
-                                System.out.println("Accuracy has to be a number, try again!");
-                            }
-                        }
-
-                        // ATTACK ELEMENT
-
-                        // CREATE THE ATTACK
-
-                        // CHECK FOR MAX AMOUNT OF ATTACKS
-
-                        // ASK USER IF THEY WANT TO ADD ANOTHER ATTACK
-
-                        // UPDATE THE POKEDEX
-                    }
-
-                case "3":
+                case 3:
                     System.out.println("\n=== Edit Pokémon ===");
 
                     //Kontrollera att pokédexet inte är tomt
@@ -215,22 +70,10 @@ public class Main {
                         );
                     }
 
-                    System.out.print("Choose A Pokémon: ");
-                    int choice;
-
                     //Kontrollera att användaren skrev ett nummer.
-                    try{
-                        choice = Integer.parseInt(scan.nextLine());
-                    } catch (NumberFormatException e) {
-                        System.out.println("Please enter a number.");
-                        break;
-                    }
-
-                    //Kontroller at valet finns i listan
-                    if (choice < 1 || choice > pokedex.getPokemon().size()){
-                        System.out.println("Invalid Pokémon choice.");
-                        break;
-                    }
+                    int choice = InputHelper.readIntBetween(scan,
+                            "\nChoose a Pokémon: ",
+                            1, pokedex.getPokemon().size());
 
                     //Hämtar Pokemon som användaren valde
                     Pokemon selectedPokemon = pokedex.getPokemon().get(choice - 1);
@@ -336,19 +179,19 @@ public class Main {
 
                     break;
 
-                case "4":
+                case 4:
                     System.out.println("\nDelete Pokémon");
                     break;
 
-                case "5":
+                case 5:
                     System.out.println("\nSave to file");
                     break;
 
-                case "6":
+                case 6:
                     System.out.println("\nLoad from file");
                     break;
 
-                case "7": //Ändra running till false
+                case 7: //Ändra running till false
                     running = false;
                     System.out.println("\nGoodbye!");
                     break;
