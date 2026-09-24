@@ -10,14 +10,15 @@ public class EditPokemon {
 
         // Kontrollera att Pokédex inte är tomt
         if(pokedex.getPokemon().isEmpty()){
-            System.out.println("The Pokédex is empty...");
+            System.out.println("\n\u001B[33mThe Pokédex is empty...\u001B[0m");
+            System.out.println("\u001B[33mPlease add a Pokémon.\u001B[0m");
             return;
         }
 
         // Visa alla Pokémon
         for (int i = 0; i < pokedex.getPokemon().size(); i++){
             System.out.println(
-            "[" + (i + 1) + "]" +
+            "[" + (i + 1) + "] " +
             pokedex.getPokemon().get(i).getName());
         }
 
@@ -48,7 +49,7 @@ public class EditPokemon {
                 String newName = scan.nextLine();
 
                 if (newName.isBlank()){
-                    System.out.println("Name cannot be empty.");
+                    System.out.println("\n\u001B[33mName cannot be empty.\u001B[0m");
                     break;
                 }
 
@@ -59,7 +60,7 @@ public class EditPokemon {
             case "2":
                 int newMaxHp = InputHelper.readIntBetween(scan,
                         "\nNew Max HP: ",
-                        1, Integer.MAX_VALUE);
+                        1, 100);
 
                 int newCurrentHp = InputHelper.readIntBetween(scan,
                         "\nNew Current HP: ",
@@ -72,17 +73,25 @@ public class EditPokemon {
                 break;
 
             case "3":
-                System.out.print("\nNew Element: ");
-                String newElementInput = scan.nextLine();
+                while (true) {
+                    System.out.print("\nNew Element: ");
+                    String newElementInput = scan.nextLine();
 
-                try{
-                    Element newElement = Element.valueOf(newElementInput.toUpperCase());
-                    selectedPokemon.setElement(newElement);
+                    try {
+                        Element newElement = Element.valueOf(newElementInput.toUpperCase());
+                        selectedPokemon.setElement(newElement);
 
-                    System.out.println("\nPokémon Element changed to: " + newElement);
-                } catch (IllegalArgumentException e){
-                    System.out.println("\nInvalid Element!");
-                    System.out.println("Please choose between: FIRE, WATER, GRASS, ELECTRIC & NORMAL.");
+                        System.out.println("\nPokémon Element changed to: " + newElement);
+                        break;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("\n\u001B[31mInvalid Element, try again.\u001B[0m");
+                        System.out.println("\u001B[31mChoose between: " +
+                                "\u001B[34mWATER\u001B[0m, " +
+                                "\u001B[31mFIRE\u001B[0m, " +
+                                "\u001B[32mGRASS\u001B[0m, " +
+                                "\u001B[33mELECTRIC\u001B[0m " +
+                                "& \u001B[97mNORMAL.\n\u001B[0m");
+                    }
                 }
                 break;
 
@@ -90,7 +99,7 @@ public class EditPokemon {
 
                 // Kontrollera att Pokémon har 4 attacker
                 if (selectedPokemon.getAttacks().size() >= 4){
-                    System.out.println("This Pokémon already has 4 attacks!");
+                    System.out.println("\n\u001B[33mThis Pokémon already has 4 attacks!\n\u001B[0m");
                     break;
                 }
 
@@ -105,8 +114,8 @@ public class EditPokemon {
             case "5":
 
                 // Kontrollera att Pokémon har attacker
-                if (selectedPokemon.getAttacks().isEmpty()){
-                    System.out.println("This Pokémon has no attacks.");
+                if (selectedPokemon.getAttacks().size() <= 1){
+                    System.out.println("\n\u001B[33mThis Pokémon must have at least 1 attack.\u001B[0m");
                     break;
                 }
 

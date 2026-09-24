@@ -43,7 +43,7 @@ public class AddPokemon {
 
         // Max HP
         int maxHp = InputHelper.readIntBetween(scan,
-                "Max HP: ", 1, Integer.MAX_VALUE);
+                "Max HP: ", 1, 100);
 
         // Current HP
         int currentHP = InputHelper.readIntBetween(scan,

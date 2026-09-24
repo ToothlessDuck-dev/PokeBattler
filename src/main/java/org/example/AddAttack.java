@@ -14,7 +14,7 @@ public class AddAttack {
             attackName = scan.nextLine();
 
             if (attackName.isBlank()) {
-                System.out.println("Attack Name cannot be empty. Try again.");
+                System.out.println("\n\u001B[33mAttack Name cannot be empty. Try again.\u001B[0m");
             } else {
                 break;
             }
@@ -22,11 +22,11 @@ public class AddAttack {
 
         // Base Damage
         int baseDamage = InputHelper.readIntBetween(scan,
-                "Base Damage: ", 1, Integer.MAX_VALUE);
+                "Base Damage: ", 1, 100);
 
         // Accuracy
         int accuracy = InputHelper.readIntBetween(scan,
-                "Accuracy: ", 0, 100);
+                "Accuracy: ", 1, 100);
 
         // Attack Element
         Element attackElement;
@@ -39,8 +39,13 @@ public class AddAttack {
                 attackElement = Element.valueOf(attackElementInput.toUpperCase());
                 break;
             } catch (IllegalArgumentException e) {
-                System.out.println("Invalid Element. Try again.");
-                System.out.println("Choose between: FIRE, WATER, GRASS, ELECTRIC & NORMAL");
+                System.out.println("\n\u001B[31mInvalid Element, try again.\u001B[0m");
+                System.out.println("\u001B[31mChoose between: " +
+                        "\u001B[34mWATER\u001B[0m, " +
+                        "\u001B[31mFIRE\u001B[0m, " +
+                        "\u001B[32mGRASS\u001B[0m, " +
+                        "\u001B[33mELECTRIC\u001B[0m " +
+                        "& \u001B[97mNORMAL.\n\u001B[0m");
             }
         }
 

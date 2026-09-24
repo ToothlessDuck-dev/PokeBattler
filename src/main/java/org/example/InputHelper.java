@@ -47,7 +47,7 @@ public class InputHelper {
                return false;
            }
 
-           System.out.println("\nPlease enter Yes or No.\n");
+           System.out.println("\n\u001B[33mPlease enter Yes or No.\n\u001B[0m");
        }
     }
 

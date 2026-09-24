@@ -9,9 +9,9 @@ public class DeletePokemon {
         System.out.println("\n=== Set free a Pokémon ===");
 
         // Kontrollera att Pokédexet inte är tomt
-        if (pokedex.getPokemon().isEmpty()){
-            System.out.println("The Pokédex is empty!");
-            System.out.println("Please add a Pokémon.");
+        if(pokedex.getPokemon().isEmpty()){
+            System.out.println("\n\u001B[33mThe Pokédex is empty...\u001B[0m");
+            System.out.println("\u001B[33mPlease add a Pokémon.\u001B[0m");
             return;
         }
 
