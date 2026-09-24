@@ -1,11 +1,12 @@
 package org.example;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class DeletePokemon {
 
     public static void delete(Scanner scan, Pokedex pokedex){
+
+        System.out.println("\n=== Set free a Pokémon ===");
 
         // Kontrollera att Pokédexet inte är tomt
         if (pokedex.getPokemon().isEmpty()){
@@ -23,7 +24,7 @@ public class DeletePokemon {
 
         // Låt användaren välja en Pokémon
         int choice = InputHelper.readIntBetween(scan,
-                "Choose a Pokémon to delete: ",
+                "Choose a Pokémon to remove from your party: ",
                 1, pokedex.getPokemon().size());
 
         // Hämntar Pokémonen som användaren vill välja
@@ -31,16 +32,16 @@ public class DeletePokemon {
 
         // Bekräfta användarens val
         boolean confirm = InputHelper.readYesNo(scan,
-                "Are you sure you want to delete " +
+                "\nAre you sure you want to delete " +
                         selectedPokemon.getName() +
                         "? [YES] | [NO]: ");
 
         // Raderar Pokémon
         if (confirm){
             pokedex.getPokemon().remove(selectedPokemon);
-            System.out.println(selectedPokemon.getName() + " was deleted!");
+            System.out.println("\n" + selectedPokemon.getName() + " was set free!");
         } else {
-            System.out.println(selectedPokemon.getName() + " was spared.. this time!");
+            System.out.println("\n" + selectedPokemon.getName() + " was spared.. this time!");
         }
 
     }

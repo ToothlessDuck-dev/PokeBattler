@@ -11,33 +11,32 @@ public class Main {
         pokedex.seedingPokemon();
         boolean running = true;
 
-        //Kör Menu tills användaren stänger programmet
+        // Kör Menu tills användaren stänger programmet
         while (running) {
 
-            //MENU VAL
+            // MENU VAL
             System.out.println("\n====== Pokédex =====");
             System.out.println("[1] Show all Pokémon"); // WORKS
-            System.out.println("[2] Add Pokémon"); // UPDATE
-            System.out.println("[3] Edit Pokémon"); // KIND OF WORKS
-            System.out.println("[4] Delete Pokémon"); // ADD
+            System.out.println("[2] Add Pokémon"); // WORKS?
+            System.out.println("[3] Edit Pokémon"); // WORKS?
+            System.out.println("[4] Delete Pokémon"); // WORKS?
             System.out.println("[5] Save to file"); // ADD
             System.out.println("[6] Load from file"); // ADD
             System.out.println("[7] Exit"); // WORKS
-            System.out.print("Choose and option: ");
 
-            //ANVÄNDARENS VAL
-            int userInput = InputHelper.readIntBetween(scan, "Choose an option: ", 1, 7);
+            // ANVÄNDARENS VAL
+            int userInput = InputHelper.readIntBetween(scan, "> Choose an option: ", 1, 7);
 
             switch (userInput) {
-                //Visa alla pokémon som finns i pokédexet
+                // Visa alla pokémon som finns i pokédexet
                 case 1:
                     System.out.println("\n=== All Pokémon ===");
 
-                    //Kollar om litan är tom
+                    // Kollar om Pokédexet är tomt
                     if (pokedex.getPokemon().isEmpty()) {
                         System.out.println("The Pokédex is empty...");
                     } else {
-                        //Kollar igenom varje pokémon i pokédexet
+                        // Skriver ut Pokémons namn, element och hp
                         for (Pokemon pokemon : pokedex.getPokemon()) {
                             System.out.println(
                                     pokemon.getName() +
@@ -48,157 +47,39 @@ public class Main {
                     }
                     break;
 
-                //Lägg till en pokémon till pokédexet, namn, element, max hp, current hp
+                // Lägger till en ny Pokémon till Pokédexet
                 case 2:
                     AddPokemon.add(scan,pokedex);
                     break;
 
+                // Ändrar information om en Pokémon
                 case 3:
-                    System.out.println("\n=== Edit Pokémon ===");
-
-                    //Kontrollera att pokédexet inte är tomt
-                    if (pokedex.getPokemon().isEmpty()){
-                        System.out.println("The Pokédex is empty..");
-                        break;
-                    }
-
-                    //Visar upp alla pokemon med ett nummer för användaren att välja enkelt
-                    for (int i = 0; i < pokedex.getPokemon().size(); i++){
-                        System.out.println(
-                                "[" + (i + 1) + "] " +
-                                pokedex.getPokemon().get(i).getName()
-                        );
-                    }
-
-                    //Kontrollera att användaren skrev ett nummer.
-                    int choice = InputHelper.readIntBetween(scan,
-                            "\nChoose a Pokémon: ",
-                            1, pokedex.getPokemon().size());
-
-                    //Hämtar Pokemon som användaren valde
-                    Pokemon selectedPokemon = pokedex.getPokemon().get(choice - 1);
-                    System.out.println("\nEditing: " + selectedPokemon.getName());
-
-                    System.out.println("[1] Change Name");
-                    System.out.println("[2] Change HP");
-                    System.out.println("[3] Change Element");
-                    System.out.println("[4] Add Attack");
-                    System.out.println("[5] Remove Attack");
-                    System.out.println("[6] Back");
-                    System.out.print("Choose an option: ");
-
-                    String editChoice = scan.nextLine();
-
-                    switch (editChoice){
-                        case "1":
-                            System.out.print("\nNew Name: ");
-                            String newName = scan.nextLine();
-
-                            if (newName.isBlank()){
-                                System.out.println("Name cannot be empty");
-                                break;
-                            }
-                            selectedPokemon.setName(newName);
-                            System.out.println("Pokémon name changed to: " + newName);
-                            break;
-
-                        case "2":
-                            System.out.print("New Max HP: ");
-                            int newMaxHp;
-
-                            try{
-                                newMaxHp = Integer.parseInt(scan.nextLine());
-
-                                if (newMaxHp <= 0){
-                                    System.out.println("Max HP must be greater than 0");
-                                    break;
-                                }
-                            } catch (NumberFormatException e) {
-                                System.out.println("Max HP must be a number.");
-                                break;
-                            }
-
-                            System.out.print("New Current HP: ");
-                            int newCurrentHp;
-
-                            try {
-                                newCurrentHp = Integer.parseInt(scan.nextLine());
-
-                                if (newCurrentHp < 0){
-                                    System.out.println("Current HP cannot be negative.");
-                                    break;
-                                }
-
-                                if (newCurrentHp > newMaxHp){
-                                    System.out.println("\nCurrent HP cannot be higher than Max HP.");
-                                    break;
-                                }
-                            } catch (NumberFormatException e){
-                                System.out.println("\nCurrent HP must be a number!");
-                                break;
-                            }
-
-                            selectedPokemon.setMaxHp(newMaxHp);
-                            selectedPokemon.setCurrentHp(newCurrentHp);
-
-                            System.out.println("Pokémon HP changed!");
-
-                            break;
-
-                        case "3":
-                            System.out.print("\nNew Element: ");
-                            String newElementInput = scan.nextLine();
-
-                            Element newElement;
-
-                            try{
-                                newElement = Element.valueOf(newElementInput.toUpperCase());
-                            } catch (IllegalArgumentException e){
-                                System.out.println("Ivalid Element.");
-                                break;
-                            }
-
-                            selectedPokemon.setElement(newElement);
-                            System.out.println("\nPokémon Element Changed to: " + newElement);
-                            break;
-
-                        case "4":
-                            System.out.println("Add Attack");
-                            break;
-
-                        case "5":
-                            System.out.println("Remove Attack");
-                            break;
-
-                        case "6":
-                            break;
-
-                        default:
-                            System.out.println("Please Choose A Number From 1-6");
-                    }
-
+                    EditPokemon.edit(scan, pokedex);
                     break;
 
+                // Ta bort en Pokémon
                 case 4:
-                    System.out.println("\nDelete Pokémon");
+                    DeletePokemon.delete(scan, pokedex);
                     break;
 
+                // Sparar Pokédexet i en fil
                 case 5:
                     System.out.println("\nSave to file");
                     break;
 
+                // Laddar Pokédexet från en fil
                 case 6:
                     System.out.println("\nLoad from file");
                     break;
 
-                case 7: //Ändra running till false
+                // Stoppar programmet
+                case 7:
                     running = false;
                     System.out.println("\nGoodbye!");
                     break;
 
-                default:
-                    System.out.println("\nPlease choose a number from 1-7");
-
+                // INGEN DEFAULT eftersom att jag har userInput (InputHelper)
+                // som kollar så att användaren skriver in rätt val
             }
         }
         scan.close();

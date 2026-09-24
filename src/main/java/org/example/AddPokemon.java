@@ -6,7 +6,7 @@ public class AddPokemon {
 
     public static void add(Scanner scan, Pokedex pokedex){
 
-        System.out.println("\n=== Add Pokémon ===");
+        System.out.println("\n=== Add a Pokémon ===");
 
         // Pokémon name
         String name;
@@ -15,7 +15,7 @@ public class AddPokemon {
             name = scan.nextLine();
 
             if (name.isBlank()){
-                System.out.println("Name cannot be empty, try again.");
+                System.out.println("\n\u001B[31mName cannot be empty, try again.\n\u001B[0m");
             } else {
                 break;
             }
@@ -31,8 +31,13 @@ public class AddPokemon {
                 element = Element.valueOf(chosenElement.toUpperCase());
                 break;
             } catch (IllegalArgumentException e) {
-                System.out.println("Invalid Element, try again.");
-                System.out.println("Choose between: FIRE, WATER, GRASS, ELECTRIC & NORMAL.");
+                System.out.println("\n\u001B[31mInvalid Element, try again.\u001B[0m");
+                System.out.println("\u001B[31mChoose between: " +
+                        "\u001B[34mWATER\u001B[0m, " +
+                        "\u001B[31mFIRE\u001B[0m, " +
+                        "\u001B[32mGRASS\u001B[0m, " +
+                        "\u001B[33mELECTRIC\u001B[0m " +
+                        "& \u001B[97mNORMAL.\n\u001B[0m");
             }
        }
 
@@ -54,52 +59,7 @@ public class AddPokemon {
 
             System.out.println("\n=== Add Attack ===");
 
-            // Attack name
-            String attackName;
-            while(true){
-                System.out.print("Attack Name: ");
-                attackName = scan.nextLine();
-
-                if (attackName.isBlank()){
-                    System.out.println("Attack Name Cannot be empty. Try again!");
-                } else {
-                    break;
-                }
-            }
-
-            // Base Damage
-            int baseDamage = InputHelper.readIntBetween(scan,
-                    "Base Damage: ", 1,
-                    Integer.MAX_VALUE);
-
-            // Accuracy
-            int accuracy = InputHelper.readIntBetween(scan,
-                    "Accuracy: ", 0, 100);
-
-            // Attack Element
-            Element attackElement;
-            while(true){
-                System.out.print("Attack Element: ");
-                String attackElementInput = scan.nextLine();
-
-                try {
-                    attackElement = Element.valueOf(
-                    attackElementInput.toUpperCase());
-                    break;
-                } catch (IllegalArgumentException e){
-                    System.out.println("Invalid Element. Try Again.");
-                    System.out.println("Choose between: FIRE, WATER, GRASS, ELECTRIC and NORMAL.");
-                }
-            }
-
-            // Create the attack
-            Attack attack = new Attack(
-                    attackName,
-                    baseDamage,
-                    accuracy,
-                    attackElement);
-
-            // Add attack to the Pokémon
+            Attack attack = AddAttack.create(scan);
             pokemon.addAttack(attack);
             System.out.println("\nAttack added!");
 
@@ -113,6 +73,6 @@ public class AddPokemon {
 
         // Add the Pokémon to the Pokédex
         pokedex.addPokemon(pokemon);
-        System.out.println(pokemon.getName() + " was added to the Pokédex!");
+        System.out.println("\n" + pokemon.getName() + " was added to the Pokédex!");
     }
 }

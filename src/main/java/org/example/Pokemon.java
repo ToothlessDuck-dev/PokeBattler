@@ -5,21 +5,23 @@ import java.util.List;
 
 public class Pokemon {
 
-    //Pokémons namn
+    // Pokémons namn
     private String name;
 
-    //Pokémon element
+    // Pokémon element
     private Element element;
 
+    // Pokémon max hp
     private int maxHp;
 
+    // Pokémons nuvarande hp
     private int currentHp;
 
-    //En lista med attacker pokémon kan använda
+    // En lista med attacker pokémon kan använda
     private List<Attack> attacks;
 
-    //Skapar en ny Pokémon med basic information och en tom attack lista
-    //Kolla ifall det är giltig information
+    // Skapar en ny Pokémon med basic information och en tom attack lista
+    // Kolla ifall det är giltig information
     public Pokemon(String name, Element element, int maxHp, int currentHp){
 
         //Ifall Pokémon namnet är tomt
