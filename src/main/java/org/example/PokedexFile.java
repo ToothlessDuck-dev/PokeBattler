@@ -77,7 +77,10 @@ public class PokedexFile {
                             accuracy,
                             element);
 
-                    currentPokemon.addAttack(attack);
+                    if (currentPokemon != null) {
+                        currentPokemon.addAttack(attack);
+                    }
+
                 } else if(parts[0].trim().startsWith("Name:")){
 
                     String name = parts[0].trim().replace("Name:", "").trim();
