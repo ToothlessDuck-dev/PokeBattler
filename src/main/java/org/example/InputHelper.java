@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class InputHelper {
 
-   //Läser in ett heltal till användaren skriver ett giltigt tal.
+   // Läser in ett heltal till användaren skriver ett giltigt tal.
    public static int readInt(Scanner scan, String prompt){
 
        while (true){
@@ -18,7 +18,7 @@ public class InputHelper {
        }
    }
 
-   //Läser in ett heltal mellan min & max
+   // Läser in ett heltal mellan min & max
     public static int readIntBetween(Scanner scan, String prompt, int min, int max){
 
        while (true){
@@ -32,7 +32,7 @@ public class InputHelper {
        }
     }
 
-    //Validerar "Yes" eller "No" från användaren
+    // Validerar "Yes" eller "No" från användaren
     public static boolean readYesNo(Scanner scan, String prompt){
 
        while (true){

@@ -38,13 +38,13 @@ public class EditPokemon {
         System.out.println("[5] Remove Attack");
         System.out.println("[6] Back");
 
-        String editChoice = InputHelper.readIntBetween(scan,
+        int editChoice = InputHelper.readIntBetween(scan,
                 "> Choose an option: ",
-                1, 6) + "";
+                1, 6);
 
         switch (editChoice){
 
-            case "1":
+            case 1:
                 System.out.print("\nNew Name: ");
                 String newName = scan.nextLine();
 
@@ -57,7 +57,7 @@ public class EditPokemon {
                 System.out.println("\nPokémon name changed to: " + newName);
                 break;
 
-            case "2":
+            case 2:
                 int newMaxHp = InputHelper.readIntBetween(scan,
                         "\nNew Max HP: ",
                         1, 100);
@@ -72,7 +72,7 @@ public class EditPokemon {
                 System.out.print("\nPokémon HP changed!\n");
                 break;
 
-            case "3":
+            case 3:
                 while (true) {
                     System.out.print("\nNew Element: ");
                     String newElementInput = scan.nextLine();
@@ -95,9 +95,9 @@ public class EditPokemon {
                 }
                 break;
 
-            case "4":
+            case 4:
 
-                // Kontrollera att Pokémon har 4 attacker
+                // Kontrollera att Pokémon redan har 4 attacker
                 if (selectedPokemon.getAttacks().size() >= 4){
                     System.out.println("\n\u001B[33mThis Pokémon already has 4 attacks!\n\u001B[0m");
                     break;
@@ -111,7 +111,7 @@ public class EditPokemon {
                 System.out.println("\nAttack added!");
                 break;
 
-            case "5":
+            case 5:
 
                 // Kontrollera att Pokémon har attacker
                 if (selectedPokemon.getAttacks().size() <= 1){
@@ -128,12 +128,12 @@ public class EditPokemon {
                             selectedPokemon.getAttacks().get(i).getName());
                 }
 
-                // Välj attack
+                // Välj vilken attack som ska tas bort
                 int attackChoice = InputHelper.readIntBetween(scan,
                         "> Choose an attack to remove: ",
                         1, selectedPokemon.getAttacks().size());
 
-                // Hämta attacken samt bekräfta
+                // Hämtar attacken och bekräftar att användaren vill ta bort den
                 Attack selectedAttack = selectedPokemon.getAttacks().get(attackChoice - 1);
 
                 boolean confirm = InputHelper.readYesNo(scan,
@@ -154,7 +154,7 @@ public class EditPokemon {
                 }
                 break;
 
-            case "6":
+            case 6:
                 break;
         }
     }

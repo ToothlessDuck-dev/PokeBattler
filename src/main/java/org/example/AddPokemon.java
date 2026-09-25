@@ -8,7 +8,7 @@ public class AddPokemon {
 
         System.out.println("\n=== Add a Pokémon ===");
 
-        // Pokémon name
+        // Läser in Pokémon namnet
         String name;
         while (true){
             System.out.print("Name: ");
@@ -21,7 +21,7 @@ public class AddPokemon {
             }
         }
 
-        // Pokémon Element
+        // Läser in Pokémon Elementet
         Element element;
         while (true){
             System.out.print("Element: ");
@@ -41,18 +41,18 @@ public class AddPokemon {
             }
        }
 
-        // Max HP
+        // Läser in Max HP
         int maxHp = InputHelper.readIntBetween(scan,
                 "Max HP: ", 1, 100);
 
-        // Current HP
+        // Läser in Current HP
         int currentHP = InputHelper.readIntBetween(scan,
                 "Current HP: ", 0, maxHp);
 
-        // Create the Pokémon
+        // Skapar Pokémon
         Pokemon pokemon = new Pokemon(name, element, maxHp, currentHP);
 
-        // Add the Attacks
+        // Lägger till 1-4 attacker
         boolean addAnotherAttack = true;
 
         while (pokemon.getAttacks().size() < 4 && addAnotherAttack){
@@ -63,7 +63,7 @@ public class AddPokemon {
             pokemon.addAttack(attack);
             System.out.println("\nAttack added!");
 
-            // Add another attack?
+            // Frågar om användaren vill lägga till en till attack
             if (pokemon.getAttacks().size() < 4){
                 addAnotherAttack = InputHelper.readYesNo(
                         scan, "\nAdd another attack? [YES] | [NO]: ");
@@ -71,7 +71,7 @@ public class AddPokemon {
             }
         }
 
-        // Add the Pokémon to the Pokédex
+        // Lägger till Pokémon i Pokédexet
         pokedex.addPokemon(pokemon);
         System.out.println("\n" + pokemon.getName() + " was added to the Pokédex!");
     }

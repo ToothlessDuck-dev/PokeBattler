@@ -6,7 +6,7 @@ public class AddAttack {
 
     public static Attack create(Scanner scan) {
 
-        //Attack Name
+        // Läser in attackens namn
         String attackName;
         while (true) {
 
@@ -20,15 +20,15 @@ public class AddAttack {
             }
         }
 
-        // Base Damage
+        // Läser in base damage
         int baseDamage = InputHelper.readIntBetween(scan,
                 "Base Damage: ", 1, 100);
 
-        // Accuracy
+        // Läser in Accuracy
         int accuracy = InputHelper.readIntBetween(scan,
                 "Accuracy: ", 1, 100);
 
-        // Attack Element
+        // Läser in attackens element
         Element attackElement;
 
         while (true) {
@@ -49,7 +49,7 @@ public class AddAttack {
             }
         }
 
-        // Create the attack
+        // Skapar attacken
         return new Attack(
                 attackName,
                 baseDamage,

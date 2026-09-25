@@ -1,32 +1,34 @@
 package org.example;
 
-import java.security.interfaces.ECKey;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Pokedex {
 
-    //Lista med alla Pokémon i Pokédexet
+    // Lista med alla Pokémon
     private List<Pokemon> pokemons;
 
-    //Tom Pokédex
+    // Skapar ett tomt Pokédex
     public Pokedex(){
         pokemons = new ArrayList<>();
     }
 
-    //Lägger till en Pokémon i Pokédexet
+    // Lägger till en Pokémon i Pokédexet
     public void addPokemon(Pokemon pokemon){
         pokemons.add(pokemon);
     }
 
-    //Denna kod gör det möjligt att läsa listan med Pokémon
+    // Getter som gör det möjligt att läsa listan med Pokémon
     public List<Pokemon> getPokemon(){
         return pokemons;
     }
 
+    // Återställer Pokédexet till de fördefinerade Pokémon
     public void seedingPokemon(){
 
-        //Attacker
+        pokemons.clear();
+
+        // Attacker till seed-data
         Attack thunderbolt = new Attack("Thunderbolt", 55, 90, Element.ELECTRIC);
         Attack electricStab = new Attack("Electric Stab", 20, 100, Element.ELECTRIC);
 
@@ -42,7 +44,7 @@ public class Pokedex {
         Attack dash = new Attack("Dash", 100, 100, Element.NORMAL);
         Attack bite = new Attack("Bite", 90, 90, Element.NORMAL);
 
-        //Pokémon
+        // Pokémon till seed-data
         Pokemon pikachu = new Pokemon("Pikachu", Element.ELECTRIC, 100, 100);
         pikachu.addAttack(thunderbolt);
         pikachu.addAttack(electricStab);
@@ -67,7 +69,7 @@ public class Pokedex {
         absol.addAttack(bite);
         absol.addAttack(electricStab);
 
-        //Lägg till Pokémon till Pokédexet
+        // Lägg till Pokémon till Pokédexet
         addPokemon(pikachu);
         addPokemon(charizard);
         addPokemon(bulbasaur);

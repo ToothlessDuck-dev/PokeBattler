@@ -1,5 +1,6 @@
 package org.example;
 
+import java.io.File;
 import java.util.Scanner;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -7,25 +8,34 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
+
         Pokedex pokedex = new Pokedex();
-        pokedex.seedingPokemon();
+
+        // Laddar sparad data om filen finns, annars skapas seed-data
+        File file = new java.io.File("pokedex.txt");
+
+        if (file.exists()){
+            PokedexFile.load(pokedex);
+        } else {
+            pokedex.seedingPokemon();
+        }
+
         boolean running = true;
 
         // Kör Menu tills användaren stänger programmet
         while (running) {
 
-            // MENU VAL
             System.out.println("\n====== Pokédex =====");
-            System.out.println("[1] Show all Pokémon"); // WORKS
-            System.out.println("[2] Add Pokémon"); // WORKS?
-            System.out.println("[3] Edit Pokémon"); // WORKS?
-            System.out.println("[4] Delete Pokémon"); // WORKS?
-            System.out.println("[5] Save to file"); // ADD
-            System.out.println("[6] Load from file"); // ADD
-            System.out.println("[7] Exit"); // WORKS
+            System.out.println("[1] Show all Pokémon");
+            System.out.println("[2] Add Pokémon");
+            System.out.println("[3] Edit Pokémon");
+            System.out.println("[4] Delete Pokémon");
+            System.out.println("[5] Save to file");
+            System.out.println("[6] Load from file");
+            System.out.println("[7] Reset to seed data");
+            System.out.println("[8] Exit");
 
-            // ANVÄNDARENS VAL
-            int userInput = InputHelper.readIntBetween(scan, "> Choose an option: ", 1, 7);
+            int userInput = InputHelper.readIntBetween(scan, "> Choose an option: ", 1, 8);
 
             switch (userInput) {
                 // Visa alla pokémon som finns i pokédexet
@@ -43,6 +53,17 @@ public class Main {
                                     " | Element: " + pokemon.getElement() +
                                     " | HP: " + pokemon.getCurrentHp() +
                                     "/" + pokemon.getMaxHp());
+
+                            // Visa alla Attacker Pokémon har
+                            for (Attack attack : pokemon.getAttacks()){
+                                System.out.println(
+                                        "ATTACK: " + attack.getName() +
+                                        " | Base Damage: " + attack.getBaseDamage() +
+                                        " | Accuracy: " + attack.getAccuracy() +
+                                        " | Element: " + attack.getElement());
+                            }
+
+                            System.out.println("\n=============================================================================\n");
                         }
                     }
                     break;
@@ -64,22 +85,29 @@ public class Main {
 
                 // Sparar Pokédexet i en fil
                 case 5:
-                    System.out.println("\nSave to file");
+                    System.out.println("\n=== Save to file ===");
+                    PokedexFile.save(pokedex);
                     break;
 
                 // Laddar Pokédexet från en fil
                 case 6:
-                    System.out.println("\nLoad from file");
+                    System.out.println("\n=== Load from file ===");
+                    PokedexFile.load(pokedex);
+                    break;
+
+                // Återställer Pokédexet till seed-data
+                case 7:
+                    System.out.println("\n=== Reset to seed data ===");
+                    pokedex.seedingPokemon();
+                    System.out.println("\nPokédex has been reset to seed data!");
                     break;
 
                 // Stoppar programmet
-                case 7:
+                case 8:
+                    PokedexFile.save(pokedex);
                     running = false;
-                    System.out.println("\nGoodbye!");
+                    System.out.println("\nGoodbye!!");
                     break;
-
-                // INGEN DEFAULT eftersom att jag har userInput (InputHelper)
-                // som kollar så att användaren skriver in rätt val
             }
         }
         scan.close();

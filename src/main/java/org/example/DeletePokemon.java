@@ -27,7 +27,7 @@ public class DeletePokemon {
                 "Choose a Pokémon to remove from your party: ",
                 1, pokedex.getPokemon().size());
 
-        // Hämntar Pokémonen som användaren vill välja
+        // Hämntar Pokémonen som användaren har valt
         Pokemon selectedPokemon = pokedex.getPokemon().get(choice - 1);
 
         // Bekräfta användarens val
@@ -36,7 +36,7 @@ public class DeletePokemon {
                         selectedPokemon.getName() +
                         "? [YES] | [NO]: ");
 
-        // Raderar Pokémon
+        // Tar bort Pokémon från Pokédexet
         if (confirm){
             pokedex.getPokemon().remove(selectedPokemon);
             System.out.println("\n" + selectedPokemon.getName() + " was set free!");

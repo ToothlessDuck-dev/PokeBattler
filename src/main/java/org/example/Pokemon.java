@@ -20,26 +20,25 @@ public class Pokemon {
     // En lista med attacker pokémon kan använda
     private List<Attack> attacks;
 
-    // Skapar en ny Pokémon med basic information och en tom attack lista
-    // Kolla ifall det är giltig information
+    // Skapar en ny Pokémon och kontrollera att informationen är giltig
     public Pokemon(String name, Element element, int maxHp, int currentHp){
 
-        //Ifall Pokémon namnet är tomt
+        // Pokémon namnet kan inte vara tomt
         if (name == null || name.isBlank()){
             throw new IllegalArgumentException("\n\u001B[31mPokémon name cannot be empty!\u001B[0m");
         }
 
-        //maxHp kan inte vara mindre än 0
+        // maxHp kan inte vara mindre än 0
         if (maxHp <= 0){
             throw new IllegalArgumentException("\n\u001B[31mThe Max HP must be greater than 0!\u001B[0m");
         }
 
-        //currentHp kan inte vara negativt
+        // currentHp kan inte vara negativt
         if (currentHp < 0){
             throw new IllegalArgumentException("\n\u001B[31mThe Current HP cannot be negative!\u001B[0m");
         }
 
-        //currentHp kan inte vara högre än maxHp
+        // currentHp kan inte vara högre än maxHp
         if (currentHp > maxHp){
             throw new IllegalArgumentException("\n\u001B[31mThe Current HP cannot be higher than the Max HP.\u001B[0m");
         }
@@ -51,7 +50,7 @@ public class Pokemon {
         this.attacks = new ArrayList<>();
     }
 
-    //Metoder för att göra det möjligt för andra..
+    // Getters som gör det möjligt för andra..
     // klasser att läsa Pokémons privata värden
     public String getName(){
         return name;
@@ -59,7 +58,7 @@ public class Pokemon {
     //ÄNDRA NAMN
     public void setName(String name){
 
-        //Pokemon namn kan inte vara tomt
+        // Pokemon namn kan inte vara tomt
         if (name == null || name.isBlank()){
             throw new IllegalArgumentException("\n\u001B[31mPokémon name cannot be empty!\u001b[0m");
         }
@@ -69,7 +68,7 @@ public class Pokemon {
     public Element getElement(){
         return element;
     }
-    //ÄNDRA POKEMONS ELEMENT
+
     public void setElement(Element element){
         this.element = element;
     }
@@ -77,10 +76,10 @@ public class Pokemon {
     public int getMaxHp(){
         return maxHp;
     }
-    //ÄNDRA HP
+
     public void setMaxHp(int maxHp){
 
-        //Max HP kan inte vara mindre än 0
+        // Max HP kan inte vara mindre än 0
         if (maxHp <= 0){
             throw new IllegalArgumentException("\n\u001B[31mMax HP must be greater than 0!\u001B[0m");
         }
@@ -90,15 +89,15 @@ public class Pokemon {
     public int getCurrentHp(){
         return currentHp;
     }
-    //Ändra Pokemons current HP
+
     public void setCurrentHp(int currentHp){
 
-        //Current HP kan inte vara negativt
+        // Current HP kan inte vara negativt
         if (currentHp < 0){
             throw new IllegalArgumentException("\n\u001B[31mThe Current HP cannot be negative!\u001B[0m");
         }
 
-        //Current HP kan inte vara högre än Max HP
+        // Current HP kan inte vara högre än Max HP
         if (currentHp > maxHp){
             throw new IllegalArgumentException("\n\u001B[31mThe Current HP cannot be higher than Max HP!\u001B[0m");
         }
@@ -109,13 +108,13 @@ public class Pokemon {
         return attacks;
     }
 
-    //Lägger till en attack till Pokémon
+    // Lägger till en attack till Pokémon
     public void addAttack(Attack attack){
         //Pokémon max 4 attacker
         if (attacks.size() >= 4){
             throw new IllegalArgumentException("\n\u001B[31mA Pokémon cannot have more than 4 attacks!\u001B[0m");
         }
-        //Pokémon ingen tom attack
+        // Pokémon ingen tom attack
         if (attack == null){
             throw new IllegalArgumentException("\n\u001B[31mAttack cannot be empty!\u001B[0m");
         }
