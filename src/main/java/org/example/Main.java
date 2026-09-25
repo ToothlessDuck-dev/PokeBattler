@@ -44,7 +44,7 @@ public class Main {
 
                     // Kollar om Pokédexet är tomt
                     if (pokedex.getPokemon().isEmpty()) {
-                        System.out.println("The Pokédex is empty...");
+                        System.out.println("\n\u001B[33mThe Pokédex is empty...\u001B[0m");
                     } else {
                         // Skriver ut Pokémons namn, element och hp
                         for (Pokemon pokemon : pokedex.getPokemon()) {
