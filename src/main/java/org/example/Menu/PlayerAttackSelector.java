@@ -18,7 +18,7 @@ public class PlayerAttackSelector {
             System.out.println(
                     (i + 1) + ". " +
                     attack.getName() +
-                    " | Damamge: " +
+                    " | Damage: " +
                     attack.getBaseDamage() +
                     " | Accuracy: " +
                     attack.getAccuracy());
