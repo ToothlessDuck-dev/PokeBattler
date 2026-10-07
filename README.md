@@ -1,3 +1,6 @@
+GAMLA README FÖR POKEDEX UPPGIFTEN:
+
+
 (Jag har redan skrivit en README och lagt till den i uppgiften som en fil, men jag kopierar även in den här för säkerhets skull.)
 
 Pokédex:
