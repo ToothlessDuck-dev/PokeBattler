@@ -1,5 +1,26 @@
 package org.example.Battle;
 
+import org.example.model.Pokemon;
+
 public class BattleEngine {
-    //Ingen ändring test för GitHub commit
+
+    // Pokémon som tillör spelaren
+    private Pokemon playerPokemon;
+
+    // Pokémon som tillhör CPU:n
+    private Pokemon cpuPokemon;
+
+    private CpuStrategy cpuStrategy;
+
+    // Skapar en ny strid med spelarens och CPU:ns Pokémon
+    public BattleEngine(Pokemon playerPokemon, Pokemon cpuPokemon, CpuStrategy cpuStrategy){
+        this.playerPokemon = playerPokemon;
+        this.cpuPokemon = cpuPokemon;
+        this.cpuStrategy = cpuStrategy;
+    }
+
+    // Startar striden
+    public void startBattle(){
+
+    }
 }

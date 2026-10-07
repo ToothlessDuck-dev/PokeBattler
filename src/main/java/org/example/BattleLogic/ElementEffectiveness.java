@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class ElementEffectiveness {
 
+    // Inehåller hur effektivt varje element är mot andra element
     private static final Map<Element, Map<Element, Double>> chart = Map.of(
             Element.FIRE, Map.of(
                     Element.GRASS, 2.0,
@@ -28,8 +29,10 @@ public class ElementEffectiveness {
             Element.NORMAL, Map.of()
     );
 
+    // Hämntar skade-multiplikatorn för attackens och försvararens element
     public static double getMultiplier(Element attackElement, Element defenderElement){
 
+        // Ifall ingen specifik kombination finns används 1.0 som standard
         return chart
                 .getOrDefault(attackElement, Map.of())
                 .getOrDefault(defenderElement, 1.0);
