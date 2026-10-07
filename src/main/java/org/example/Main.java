@@ -1,5 +1,10 @@
 package org.example;
 
+import org.example.input.InputHelper;
+import org.example.model.Attack;
+import org.example.model.Pokemon;
+import org.example.pokedex.*;
+
 import java.io.File;
 import java.util.Scanner;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or

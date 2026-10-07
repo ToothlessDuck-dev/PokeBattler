@@ -1,4 +1,8 @@
-package org.example;
+package org.example.pokedex;
+
+import org.example.input.InputHelper;
+import org.example.model.Attack;
+import org.example.model.Element;
 
 import java.util.Scanner;
 

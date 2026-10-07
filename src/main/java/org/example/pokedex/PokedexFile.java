@@ -1,4 +1,8 @@
-package org.example;
+package org.example.pokedex;
+
+import org.example.model.Attack;
+import org.example.model.Element;
+import org.example.model.Pokemon;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
