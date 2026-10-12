@@ -1,14 +1,17 @@
 package org.example;
 
+import org.example.Battle.BattleEngine;
+import org.example.Battle.RandomStrategy;
+import org.example.model.Element;
 import org.example.input.InputHelper;
 import org.example.model.Attack;
 import org.example.model.Pokemon;
 import org.example.pokedex.*;
 
+import javax.sound.midi.Soundbank;
 import java.io.File;
 import java.util.Scanner;
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
 public class Main {
     public static void main(String[] args) {
 
@@ -39,8 +42,9 @@ public class Main {
             System.out.println("[6] Load from file");
             System.out.println("[7] Reset to seed data");
             System.out.println("[8] Exit");
+            System.out.println("[9] Start a Battle");
 
-            int userInput = InputHelper.readIntBetween(scan, "> Choose an option: ", 1, 8);
+            int userInput = InputHelper.readIntBetween(scan, "> Choose an option: ", 1, 9);
 
             switch (userInput) {
                 // Visa alla pokémon som finns i pokédexet
@@ -112,6 +116,11 @@ public class Main {
                     PokedexFile.save(pokedex);
                     running = false;
                     System.out.println("\nGoodbye!!");
+                    break;
+
+                // Startar en strid
+                case 9:
+                    System.out.println("\n=== Start Battle ===");
                     break;
             }
         }
