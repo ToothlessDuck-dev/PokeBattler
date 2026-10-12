@@ -2,13 +2,14 @@ package org.example;
 
 import org.example.Battle.BattleEngine;
 import org.example.Battle.RandomStrategy;
+import org.example.Battle.WildPokemonPool;
 import org.example.model.Element;
 import org.example.input.InputHelper;
 import org.example.model.Attack;
 import org.example.model.Pokemon;
 import org.example.pokedex.*;
+import org.example.Menu.PlayerPokemonSelector;
 
-import javax.sound.midi.Soundbank;
 import java.io.File;
 import java.util.Scanner;
 
@@ -120,7 +121,30 @@ public class Main {
 
                 // Startar en strid
                 case 9:
-                    System.out.println("\n=== Start Battle ===");
+                    if (pokedex.getPokemon().isEmpty()){
+                        System.out.println("\nYou need at least one Pokémon to battle");
+                        break;
+                    }
+
+                    boolean hasAvailablePokemon = pokedex.getPokemon().stream().
+                            anyMatch(pokemon -> pokemon.getCurrentHp() > 0);
+
+                    if (!hasAvailablePokemon){
+                        System.out.println("\nYou have no Pokémon available to battle!");
+                        break;
+                    }
+
+                    Pokemon playerPokemon = new PlayerPokemonSelector().choosePokemon(scan, pokedex);
+
+                    Pokemon cpuPokemon = WildPokemonPool.createWildPokemon();
+
+                    BattleEngine battle = new BattleEngine(
+                            playerPokemon,
+                            cpuPokemon,
+                            new RandomStrategy()
+                    );
+
+                    battle.startBattle(scan);
                     break;
             }
         }

@@ -9,24 +9,25 @@ public class PlayerAttackSelector {
 
     // Låter spelaren välja en attack från sin Pokémon
     public Attack chooseAttack(Scanner scan, Pokemon pokemon){
-        System.out.println("\n=== Choose an Attack ===");
 
         // Visar alla attacker som Pokémonen kan använda
+        System.out.println("\nChoose an attack for " + pokemon.getName() + ":");
+        System.out.println("---------------------------------------------------");
         for (int i = 0; i < pokemon.getAttacks().size(); i++){
             Attack attack = pokemon.getAttacks().get(i);
 
-            System.out.println(
-                    (i + 1) + ". " +
-                    attack.getName() +
-                    " | Damage: " +
-                    attack.getBaseDamage() +
-                    " | Accuracy: " +
-                    attack.getAccuracy());
+            System.out.printf(
+                    "[%d] %-14s | Damage: %3d | Accuracy: %3d%%%n",
+                    i + 1, attack.getName(), attack.getBaseDamage(),
+                    attack.getAccuracy()
+            );
         }
+
+        System.out.println("---------------------------------------------------");
 
         // Låter spelaren välja ett giltigt nummer
         int choice = InputHelper.readIntBetween(
-                scan, "Choose an attack: ",
+                scan, "> Choice: ",
                 1, pokemon.getAttacks().size());
 
         // Returnerar attacken som spelaren valde

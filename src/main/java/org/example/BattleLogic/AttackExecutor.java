@@ -12,7 +12,7 @@ public class AttackExecutor {
         // Visar vilken attack som används
         System.out.println(
                 attacker.getName() +
-                " chose " +
+                " used " +
                 attack.getName() + "!");
 
         // Kontrollerar om attacken träffar
@@ -27,19 +27,16 @@ public class AttackExecutor {
                     0, defender.getCurrentHp() - damage);
             defender.setCurrentHp(newHp);
 
-            System.out.println(
-                    attacker.getName() +
-                    " dealt " +
-                    damage + " damage!");
+            // Visa skada samt återstående HP
+            System.out.println("Hit! " +
+                    damage + " damage dealt.");
 
-            System.out.println(
-                    defender.getName() +
-                    " has " + defender.getCurrentHp() +
-                    "/" + defender.getMaxHp() + " HP left!");
+            System.out.println(defender.getName() +
+                    ": " + defender.getCurrentHp() +
+                    "/" + defender.getMaxHp() +
+                    " HP!");
         } else {
-            System.out.println(
-                    attacker.getName() +
-                    "'s attack missed!");
+            System.out.println("The attack missed!");
         }
     }
 }
