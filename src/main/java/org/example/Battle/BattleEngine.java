@@ -72,7 +72,7 @@ public class BattleEngine {
             // Kontrollera att CPU:n har en attack
             if (cpuAttack == null) {
                 System.out.println("\n" + cpuPokemon.getName() +
-                        " has no attacks and cannot continue the battle.");
+                        " \u001B[33mhas no attacks and cannot continue the battle.\u001B[0m");
                 return;
             }
 

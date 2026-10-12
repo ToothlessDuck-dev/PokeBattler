@@ -34,7 +34,7 @@ public class PlayerPokemonSelector {
             Pokemon chosenPokemon = pokedex.getPokemon().get(choice - 1);
 
             if (chosenPokemon.getCurrentHp() <= 0) {
-                System.out.println("\nThis Pokémon had fainted! Choose a different one.");
+                System.out.println("\n\u001B[33mThis Pokémon had fainted! Choose a different one.\u001b[0m");
             } else {
                 return chosenPokemon;
             }

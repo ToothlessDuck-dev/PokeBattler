@@ -9,6 +9,7 @@ import org.example.model.Attack;
 import org.example.model.Pokemon;
 import org.example.pokedex.*;
 import org.example.Menu.PlayerPokemonSelector;
+import org.example.Menu.PokemonHealer;
 
 import java.io.File;
 import java.util.Scanner;
@@ -42,15 +43,17 @@ public class Main {
             System.out.println("[5] Save to file");
             System.out.println("[6] Load from file");
             System.out.println("[7] Reset to seed data");
-            System.out.println("[8] Exit");
-            System.out.println("[9] Start a Battle");
+            System.out.println("[8] Start a Battle");
+            System.out.println("[9] Heal Pokémon");
+            System.out.println("[10] Exit");
 
-            int userInput = InputHelper.readIntBetween(scan, "> Choose an option: ", 1, 9);
+            int userInput = InputHelper.readIntBetween(scan, "> Choose an option: ", 1, 10);
 
             switch (userInput) {
                 // Visa alla pokémon som finns i pokédexet
                 case 1:
                     System.out.println("\n=== All Pokémon ===");
+                    System.out.println("=============================================================================");
 
                     // Kollar om Pokédexet är tomt
                     if (pokedex.getPokemon().isEmpty()) {
@@ -112,15 +115,8 @@ public class Main {
                     System.out.println("\nPokédex has been reset to seed data!");
                     break;
 
-                // Stoppar programmet
+                // Startar strid
                 case 8:
-                    PokedexFile.save(pokedex);
-                    running = false;
-                    System.out.println("\nGoodbye!!");
-                    break;
-
-                // Startar en strid
-                case 9:
                     if (pokedex.getPokemon().isEmpty()){
                         System.out.println("\nYou need at least one Pokémon to battle");
                         break;
@@ -145,6 +141,18 @@ public class Main {
                     );
 
                     battle.startBattle(scan);
+                    break;
+
+                // Läker den valda Pokémonen
+                case 9:
+                    new PokemonHealer().healPokemon(scan, pokedex);
+                    break;
+
+                // Avslutar och sparar fil
+                case 10:
+                    PokedexFile.save(pokedex);
+                    running = false;
+                    System.out.println("\nGoodbye!!");
                     break;
             }
         }
