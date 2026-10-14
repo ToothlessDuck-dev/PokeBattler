@@ -21,6 +21,11 @@ public class BattleHistory {
             Pokemon cpuPokemon,
             String result) {
 
+        if (result == null){
+            System.out.println("\n\u001B[33mCould not get battle result information.\u001B[0m");
+            return;
+        }
+
         try (PrintWriter writer = new PrintWriter(
                 new FileWriter(FILE_NAME, true))) {
 
@@ -37,18 +42,25 @@ public class BattleHistory {
                     " | Final HP: " + cpuPokemon.getCurrentHp() +
                     "/" + cpuPokemon.getMaxHp());
 
-            if (result.equals("result")) {
+            if (result.equalsIgnoreCase("WIN")
+                || result.equalsIgnoreCase("VICTORY")){
+
                 writer.println("Result: VICTORY");
-            } else {
+            } else if (result.equalsIgnoreCase("LOSS")
+                || result.equalsIgnoreCase("DEFEAT")){
+
                 writer.println("Result: DEFEAT");
+            } else {
+                System.out.println("\n\u001B[33mCould not get battle result information.\u001B[0m");
+                return;
             }
 
-            writer.println("--------------------------------------------------\n");
+            writer.println("\n--------------------------------------------------\n");
 
-            System.out.println("\nBattle saved to history!");
+            System.out.println("\n      Battle saved to history!");
 
         } catch (IOException e) {
-            System.out.println("\nCould not save battle history!");
+            System.out.println("\n      Could not save battle history!");
         }
     }
 
@@ -64,7 +76,7 @@ public class BattleHistory {
 
         System.out.println("\n========== BATTLE HISTORY ==========\n");
 
-        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(FILE_NAME))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 
             String line;
 
@@ -76,6 +88,44 @@ public class BattleHistory {
 
         } catch (IOException e) {
             System.out.println("\nCould not read battle history!");
+        }
+    }
+
+    // Visar sasmmanlagd statistik för alla sparade strider
+    public static void showStatistics(){
+        File file = new File(FILE_NAME);
+
+        if (!file.exists() || file.length() == 0) {
+            System.out.println("\n\u001B[33mNo battles have been recorded\u001B[0m");
+            System.out.println("\nTotal battles: 0");
+            System.out.println("Wins: 0");
+            System.out.println("Losses: 0");
+            return;
+        }
+
+        int wins = 0;
+        int losses = 0;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))){
+
+            String line;
+
+            while ((line = reader.readLine()) != null){
+
+                if (line.equals("Result: VICTORY")){
+                    wins++;
+                } else if (line.equals("Result: DEFEAT")){
+                    losses++;
+                }
+            }
+
+            System.out.println("\n========== BATTLE STATISTICS ==========\n");
+            System.out.println("Total battles: " + (wins + losses));
+            System.out.println("Wins: " + wins);
+            System.out.println("Losses: " + losses);
+            System.out.println("\n=======================================");
+        } catch (IOException e){
+            System.out.println("\n\u001B[33mCould not read the battle statistics.\u001B[0m");
         }
     }
 }

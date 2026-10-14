@@ -10,6 +10,7 @@ import org.example.model.Pokemon;
 import org.example.pokedex.*;
 import org.example.Menu.PlayerPokemonSelector;
 import org.example.Menu.PokemonHealer;
+import org.example.Battle.BattleHistory;
 
 import java.io.File;
 import java.util.Scanner;
@@ -45,9 +46,10 @@ public class Main {
             System.out.println("[7] Reset to seed data");
             System.out.println("[8] Start a Battle");
             System.out.println("[9] Heal Pokémon");
-            System.out.println("[10] Exit");
+            System.out.println("[10] Battle Results");
+            System.out.println("[11] EXIT");
 
-            int userInput = InputHelper.readIntBetween(scan, "> Choose an option: ", 1, 10);
+            int userInput = InputHelper.readIntBetween(scan, "> Choose an option: ", 1, 11);
 
             switch (userInput) {
                 // Visa alla pokémon som finns i pokédexet
@@ -148,8 +150,13 @@ public class Main {
                     new PokemonHealer().healPokemon(scan, pokedex);
                     break;
 
-                // Avslutar och sparar fil
+                // Visar stridsresultat och statistik
                 case 10:
+                    BattleHistory.showStatistics();
+                    break;
+
+                // Avslutar och sparar fil
+                case 11:
                     PokedexFile.save(pokedex);
                     running = false;
                     System.out.println("\nGoodbye!!");

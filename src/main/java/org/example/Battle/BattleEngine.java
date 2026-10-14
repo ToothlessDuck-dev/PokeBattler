@@ -7,6 +7,7 @@ import org.example.Menu.PlayerAttackSelector;
 import org.example.model.Attack;
 import org.example.model.Pokemon;
 import java.util.Scanner;
+import org.example.Battle.BattleHistory;
 
 public class BattleEngine {
 
@@ -73,7 +74,7 @@ public class BattleEngine {
             if (cpuAttack == null) {
                 System.out.println("\n" + cpuPokemon.getName() +
                         " \u001B[33mhas no attacks and cannot continue the battle.\u001B[0m");
-                return;
+                break;
             }
 
             // Utför CPU:ns attack
@@ -89,13 +90,19 @@ public class BattleEngine {
 
             //System.out.println("\n--------------------------------");
         }
-        // Visar resultatet av striden
+        // Visar och sparar resultatet av striden
         System.out.println("\n====================================");
         System.out.println("          Battle Finished");
+
         if (playerPokemon.getCurrentHp() <= 0) {
             System.out.println("\n      You have lost the battle!💀");
+
+            BattleHistory.saveBattle(playerPokemon, cpuPokemon, "LOSS");
+
         } else if (cpuPokemon.getCurrentHp() <= 0) {
             System.out.println("\n      You have won the battle!🎉");
+
+            BattleHistory.saveBattle(playerPokemon, cpuPokemon, "WIN");
         }
 
         System.out.println("====================================");
