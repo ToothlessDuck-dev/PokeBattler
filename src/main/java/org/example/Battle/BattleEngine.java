@@ -6,10 +6,17 @@ import org.example.BattleLogic.DamageCalculator;
 import org.example.Menu.PlayerAttackSelector;
 import org.example.model.Attack;
 import org.example.model.Pokemon;
-import java.util.Scanner;
 import org.example.Battle.BattleHistory;
 
+import java.util.Scanner;
+import java.util.Random;
+
 public class BattleEngine {
+
+    // slumpmässig start till striden
+    private boolean firstMove() {
+        return new Random().nextBoolean();
+    }
 
     // Pokémon som tillör spelaren
     private Pokemon playerPokemon;
@@ -46,50 +53,51 @@ public class BattleEngine {
                 " vs " + cpuPokemon.getName());
         System.out.println("====================================");
 
-        // Fortsätter tills en av Pokémon har slut på HP
+        // Slumpmässig faktor som väljer vem som har första attacken.
+        boolean playerTurn = firstMove();
+
         while (playerPokemon.getCurrentHp() > 0 &&
                 cpuPokemon.getCurrentHp() > 0) {
 
-            // Låter spelaren välja sin attack
-            System.out.println("\n---------- YOUR TURN ----------");
-            Attack playerAttack = playerAttackSelector.chooseAttack(
-                    scan, playerPokemon);
+            if (playerTurn){
+                //spelarens tur
+                System.out.println("\n---------- YOUR TURN ----------");
 
-            // Utför spelarens attack
-            attackExecutor.executeAttack(
-                    playerPokemon, cpuPokemon, playerAttack);
+                Attack playerAttack = playerAttackSelector.chooseAttack(scan, playerPokemon);
 
-            // Kontrollera om CPU:ns Pokémon har besegrats
-            if (cpuPokemon.getCurrentHp() <= 0) {
-                System.out.println("\n" + cpuPokemon.getName() +
-                        " had fainted!");
-                break;
+                attackExecutor.executeAttack(
+                        playerPokemon, cpuPokemon, playerAttack);
+
+                if(cpuPokemon.getCurrentHp() <= 0){
+                    System.out.println("\n" + cpuPokemon.getName() + " has fainted!");
+                    break;
+                }
+            } else {
+                // CPU:ns tur
+                System.out.println("\n------- OPPONENT'S TURN -------");
+
+                Attack cpuAttack = cpuStrategy.chooseAttack(cpuPokemon);
+
+                if (cpuAttack == null){
+                    System.out.println("\n" + cpuPokemon.getName() +
+                            " \n\u001B[33mhas no attacks and cannot continue the battle.\u001B[0m");
+                    break;
+                }
+
+                // Utför CPU:ns attack
+                attackExecutor.executeAttack(cpuPokemon, playerPokemon, cpuAttack);
+
+                // Kontrollera om användarens Pokémon har besegrats
+                if (playerPokemon.getCurrentHp() <= 0){
+                    System.out.println("\n" + playerPokemon.getName() + " has fainted!");
+                    break;
+                }
             }
 
-            // CPU:n väljer en attack
-            System.out.println("\n------- OPPONENT'S TURN -------");
-            Attack cpuAttack = cpuStrategy.chooseAttack(cpuPokemon);
-
-            // Kontrollera att CPU:n har en attack
-            if (cpuAttack == null) {
-                System.out.println("\n" + cpuPokemon.getName() +
-                        " \u001B[33mhas no attacks and cannot continue the battle.\u001B[0m");
-                break;
-            }
-
-            // Utför CPU:ns attack
-            attackExecutor.executeAttack(
-                    cpuPokemon, playerPokemon, cpuAttack);
-
-            // Kontrollera om spelarens Pokémon har besegrats
-            if (playerPokemon.getCurrentHp() <= 0) {
-                System.out.println("\n" + playerPokemon.getName() +
-                        " has fainted!");
-                break;
-            }
-
-            //System.out.println("\n--------------------------------");
+            // Byter tur efter varje attack
+            playerTurn = !playerTurn;
         }
+
         // Visar och sparar resultatet av striden
         System.out.println("\n====================================");
         System.out.println("          Battle Finished");

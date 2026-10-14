@@ -57,7 +57,7 @@ public class BattleHistory {
 
             writer.println("\n--------------------------------------------------\n");
 
-            System.out.println("\n      Battle saved to history!");
+            System.out.println("\n       Battle saved to history!");
 
         } catch (IOException e) {
             System.out.println("\n      Could not save battle history!");

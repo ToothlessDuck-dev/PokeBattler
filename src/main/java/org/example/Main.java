@@ -120,7 +120,7 @@ public class Main {
                 // Startar strid
                 case 8:
                     if (pokedex.getPokemon().isEmpty()){
-                        System.out.println("\nYou need at least one Pokémon to battle");
+                        System.out.println("\n\u001B[33mYou need at least one Pokémon to battle\u001B[0m");
                         break;
                     }
 
@@ -128,7 +128,7 @@ public class Main {
                             anyMatch(pokemon -> pokemon.getCurrentHp() > 0);
 
                     if (!hasAvailablePokemon){
-                        System.out.println("\nYou have no Pokémon available to battle!");
+                        System.out.println("\n\u001B[33mYou have no Pokémon available to battle!\u001B[0m");
                         break;
                     }
 
