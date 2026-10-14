@@ -39,6 +39,7 @@ public class PokedexFile {
                 write.println("\n=================================================" +
                         "===================================\n");
             }
+
             System.out.println("\nPokédex saved successfully!");
         } catch (IOException e){
             System.out.println("\nCould not save the Pokédex!");
