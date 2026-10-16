@@ -1,5 +1,6 @@
 package org.example.Battle;
 
+import org.example.input.ConsoleColors;
 import org.example.model.Pokemon;
 
 import java.io.BufferedReader;
@@ -22,7 +23,8 @@ public class BattleHistory {
             String result) {
 
         if (result == null){
-            System.out.println("\nCould not get battle result information.");
+            System.out.println(ConsoleColors.ERROR + "\nCould not get battle result information." +
+                    ConsoleColors.DEFAULT);
             return;
         }
 
@@ -51,16 +53,17 @@ public class BattleHistory {
 
                 writer.println("Result: DEFEAT");
             } else {
-                System.out.println("\nCould not get battle result information.");
+                System.out.println(ConsoleColors.ERROR + "\nCould not get battle result information." +
+                        ConsoleColors.DEFAULT);
                 return;
             }
 
             writer.println("\n--------------------------------------------------\n");
 
-            System.out.println("\n       Battle saved to history!");
+            System.out.println(ConsoleColors.SUCCESS + "\n       Battle saved to history!" + ConsoleColors.DEFAULT);
 
         } catch (IOException e) {
-            System.out.println("\n      Could not save battle history!");
+            System.out.println(ConsoleColors.WARNING + "\n      Could not save battle history!" + ConsoleColors.DEFAULT);
         }
     }
 
@@ -70,7 +73,7 @@ public class BattleHistory {
         File file = new File(FILE_NAME);
 
         if (!file.exists() || file.length() == 0) {
-            System.out.println("\nNo Battles have been recorded yet.");
+            System.out.println(ConsoleColors.ERROR + "\nNo Battles have been recorded yet." + ConsoleColors.DEFAULT);
             return;
         }
 
@@ -87,7 +90,7 @@ public class BattleHistory {
             System.out.println("\n====================================");
 
         } catch (IOException e) {
-            System.out.println("\nCould not read battle history!");
+            System.out.println(ConsoleColors.WARNING + "\nCould not read battle history!" + ConsoleColors.DEFAULT);
         }
     }
 
@@ -97,11 +100,11 @@ public class BattleHistory {
 
         if (!file.exists() || file.length() == 0) {
             System.out.println("\n------------------------------\n");
-            System.out.println("No battles have been recorded");
+            System.out.println(ConsoleColors.WARNING + "No battles have been recorded" + ConsoleColors.DEFAULT);
             System.out.println("\nTotal battles: 0");
             System.out.println("Wins: 0");
             System.out.println("Losses: 0");
-            System.out.println("\n------------------------------");
+            System.out.println("\n------------------------------\n");
             return;
         }
 
@@ -125,9 +128,9 @@ public class BattleHistory {
             System.out.println("Total battles: " + (wins + losses));
             System.out.println("Wins: " + wins);
             System.out.println("Losses: " + losses);
-            System.out.println("\n=======================================");
+            System.out.println("\n=======================================\n");
         } catch (IOException e){
-            System.out.println("\nCould not read the battle statistics.");
+            System.out.println(ConsoleColors.WARNING + "\nCould not read the battle statistics." + ConsoleColors.DEFAULT);
         }
     }
 }

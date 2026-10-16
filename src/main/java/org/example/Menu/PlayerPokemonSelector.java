@@ -1,5 +1,6 @@
 package org.example.Menu;
 
+import org.example.input.ConsoleColors;
 import org.example.input.InputHelper;
 import org.example.model.Pokemon;
 import org.example.pokedex.Pokedex;
@@ -34,7 +35,8 @@ public class PlayerPokemonSelector {
             Pokemon chosenPokemon = pokedex.getPokemon().get(choice - 1);
 
             if (chosenPokemon.getCurrentHp() <= 0) {
-                System.out.println("\nThis Pokémon had fainted! Choose a different one.");
+                System.out.println(ConsoleColors.WARNING + "\nThis Pokémon had fainted! Choose a different one.\n" +
+                        ConsoleColors.DEFAULT);
             } else {
                 return chosenPokemon;
             }

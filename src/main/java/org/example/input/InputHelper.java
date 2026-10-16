@@ -13,7 +13,7 @@ public class InputHelper {
            try{
                return Integer.parseInt(scan.nextLine());
            } catch (NumberFormatException e){
-               System.out.println("\nPlease enter a valid number.\n");
+               System.out.println(ConsoleColors.ERROR + "\nPlease enter a valid number.\n" + ConsoleColors.DEFAULT);
            }
        }
    }
@@ -28,7 +28,8 @@ public class InputHelper {
                return number;
            }
 
-           System.out.println("\nPlease enter a number between " + min + " and " + max + ".\n");
+           System.out.println(ConsoleColors.ERROR + "\nPlease enter a number between " + min + " and " + max + ".\n"
+           + ConsoleColors.DEFAULT);
        }
     }
 
@@ -47,7 +48,7 @@ public class InputHelper {
                return false;
            }
 
-           System.out.println("\nPlease enter Yes or No.");
+           System.out.println(ConsoleColors.ERROR + "\nPlease enter Yes or No." + ConsoleColors.DEFAULT);
        }
     }
 

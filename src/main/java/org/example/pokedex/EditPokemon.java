@@ -1,5 +1,6 @@
 package org.example.pokedex;
 
+import org.example.input.ConsoleColors;
 import org.example.input.InputHelper;
 import org.example.model.Attack;
 import org.example.model.Element;
@@ -15,8 +16,8 @@ public class EditPokemon {
 
         // Kontrollera att Pokédex inte är tomt
         if(pokedex.getPokemon().isEmpty()){
-            System.out.println("\nThe Pokédex is empty");
-            System.out.println("Please add a Pokémon.\n");
+            System.out.println(ConsoleColors.WARNING + "\nThe Pokédex is empty" + ConsoleColors.DEFAULT);
+            System.out.println(ConsoleColors.WARNING + "Please add a Pokémon.\n" + ConsoleColors.DEFAULT);
             return;
         }
 
@@ -54,13 +55,14 @@ public class EditPokemon {
                 String newName = scan.nextLine();
 
                 if (newName.isBlank()){
-                    System.out.println("Name cannot be empty.");
+                    System.out.println(ConsoleColors.WARNING + "\nName cannot be empty.\n" + ConsoleColors.DEFAULT);
                     break;
                 }
 
                 selectedPokemon.setName(newName);
                 System.out.println("\n----------------------------------------");
-                System.out.println("     Pokémon name changed to: " + newName);
+                System.out.println(ConsoleColors.SUCCESS + "     Pokémon name changed to: " +
+                        ConsoleColors.DEFAULT + newName);
                 System.out.println("----------------------------------------\n");
                 break;
 
@@ -77,7 +79,7 @@ public class EditPokemon {
                 selectedPokemon.setCurrentHp(newCurrentHp);
 
                 System.out.println("\n----------------------------------------");
-                System.out.println("          Pokémon HP changed!");
+                System.out.println(ConsoleColors.SUCCESS + "          Pokémon HP changed!" + ConsoleColors.DEFAULT);
                 System.out.println("----------------------------------------\n");
                 break;
 
@@ -91,11 +93,12 @@ public class EditPokemon {
                         selectedPokemon.setElement(newElement);
 
                         System.out.println("\n----------------------------------------");
-                        System.out.println("   Pokémon Element changed to: " + newElement);
+                        System.out.println(ConsoleColors.SUCCESS + "   Pokémon Element changed to: " +
+                                ConsoleColors.DEFAULT + newElement);
                         System.out.println("----------------------------------------\n");
                         break;
                     } catch (IllegalArgumentException e) {
-                        System.out.println("\nInvalid Element, try again.");
+                        System.out.println(ConsoleColors.ERROR + "\nInvalid Element, try again." + ConsoleColors.DEFAULT);
                         System.out.println("\u001B[31mChoose between: " +
                                 "\u001B[34mWATER\u001B[0m, " +
                                 "\u001B[31mFIRE\u001B[0m, " +
@@ -110,7 +113,7 @@ public class EditPokemon {
 
                 // Kontrollera att Pokémon redan har 4 attacker
                 if (selectedPokemon.getAttacks().size() >= 4){
-                    System.out.println("\nThis Pokémon already has 4 attacks!");
+                    System.out.println(ConsoleColors.WARNING + "\nThis Pokémon already has 4 attacks!" + ConsoleColors.DEFAULT);
                     break;
                 }
 
@@ -120,8 +123,8 @@ public class EditPokemon {
                 selectedPokemon.addAttack(attack);
 
                 System.out.println("\n----------------------------------------");
-                System.out.println("              " +
-                        "Attack added!");
+                System.out.println(ConsoleColors.SUCCESS + "              " +
+                        "Attack added!" + ConsoleColors.DEFAULT);
                 System.out.println("----------------------------------------\n");
                 break;
 
@@ -129,7 +132,8 @@ public class EditPokemon {
 
                 // Kontrollera att Pokémon har attacker
                 if (selectedPokemon.getAttacks().size() <= 1){
-                    System.out.println("\nThis Pokémon must have at least 1 attack.\n");
+                    System.out.println(ConsoleColors.WARNING + "\nThis Pokémon must have at least 1 attack.\n" +
+                            ConsoleColors.DEFAULT);
                     break;
                 }
 

@@ -1,5 +1,6 @@
 package org.example.pokedex;
 
+import org.example.input.ConsoleColors;
 import org.example.input.InputHelper;
 import org.example.model.Attack;
 import org.example.model.Element;
@@ -18,7 +19,8 @@ public class AddAttack {
             attackName = scan.nextLine();
 
             if (attackName.isBlank()) {
-                System.out.println("\nAttack Name cannot be empty. Try again.");
+                System.out.println(ConsoleColors.WARNING + "\nAttack Name cannot be empty. Try again." +
+                        ConsoleColors.DEFAULT);
             } else {
                 break;
             }
@@ -43,8 +45,8 @@ public class AddAttack {
                 attackElement = Element.valueOf(attackElementInput.toUpperCase());
                 break;
             } catch (IllegalArgumentException e) {
-                System.out.println("\nInvalid Element, try again.");
-                System.out.println("Choose between: " +
+                System.out.println(ConsoleColors.ERROR + "\nInvalid Element, try again." + ConsoleColors.DEFAULT);
+                System.out.println(ConsoleColors.WARNING + "Choose between: " + ConsoleColors.DEFAULT +
                         "\u001B[34mWATER\u001B[0m, " +
                         "\u001B[31mFIRE\u001B[0m, " +
                         "\u001B[32mGRASS\u001B[0m, " +

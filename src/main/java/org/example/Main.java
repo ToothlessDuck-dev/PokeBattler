@@ -1,18 +1,16 @@
 package org.example;
 
 import org.example.Battle.BattleEngine;
+import org.example.Battle.BattleHistory;
 import org.example.Battle.RandomStrategy;
 import org.example.Battle.WildPokemonPool;
+import org.example.Menu.PlayerPokemonSelector;
+import org.example.Menu.PokemonHealer;
 import org.example.input.ConsoleColors;
-import org.example.model.Element;
 import org.example.input.InputHelper;
 import org.example.model.Attack;
 import org.example.model.Pokemon;
 import org.example.pokedex.*;
-import org.example.Menu.PlayerPokemonSelector;
-import org.example.Menu.PokemonHealer;
-import org.example.Battle.BattleHistory;
-import org.example.input.ConsoleColors;
 
 import java.io.File;
 import java.util.Scanner;
@@ -51,7 +49,7 @@ public class Main {
             System.out.println("[10] Battle Results");
             System.out.println("[11] EXIT");
 
-            int userInput = InputHelper.readIntBetween(scan, "> Choose an option: ", 1, 11);
+            int userInput = InputHelper.readIntBetween(scan,"> Choose an option: ", 1, 11);
 
             switch (userInput) {
                 // Visa alla pokémon som finns i pokédexet
@@ -62,8 +60,8 @@ public class Main {
 
                     // Kollar om Pokédexet är tomt
                     if (pokedex.getPokemon().isEmpty()) {
-                        System.out.println("\n                            " +
-                                "The Pokédex is empty...\n");
+                        System.out.println(ConsoleColors.WARNING + "                            " +
+                                "The Pokédex is empty...\n" + ConsoleColors.DEFAULT);
                     } else {
                         // Skriver ut Pokémons namn, element och hp
                         for (Pokemon pokemon : pokedex.getPokemon()) {
@@ -126,7 +124,8 @@ public class Main {
                 // Startar strid
                 case 8:
                     if (pokedex.getPokemon().isEmpty()){
-                        System.out.println("\nYou need at least one Pokémon to battle");
+                        System.out.println(ConsoleColors.WARNING + "\nYou need at least one Pokémon to battle"
+                        + ConsoleColors.DEFAULT);
                         break;
                     }
 
@@ -134,7 +133,8 @@ public class Main {
                             anyMatch(pokemon -> pokemon.getCurrentHp() > 0);
 
                     if (!hasAvailablePokemon){
-                        System.out.println("\nYou have no Pokémon available to battle!");
+                        System.out.println(ConsoleColors.WARNING + "\nYou have no Pokémon available to battle!\n"
+                        + ConsoleColors.DEFAULT);
                         break;
                     }
 
@@ -165,7 +165,7 @@ public class Main {
                 case 11:
                     PokedexFile.save(pokedex);
                     running = false;
-                    System.out.println("\nGoodbye!!");
+                    System.out.println("Goodbye!!");
                     break;
             }
         }

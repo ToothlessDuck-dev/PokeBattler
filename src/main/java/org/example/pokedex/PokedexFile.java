@@ -1,5 +1,6 @@
 package org.example.pokedex;
 
+import org.example.input.ConsoleColors;
 import org.example.model.Attack;
 import org.example.model.Element;
 import org.example.model.Pokemon;
@@ -41,11 +42,13 @@ public class PokedexFile {
             }
 
             System.out.println("----------------------------------------");
-            System.out.println("       Pokédex saved successfully!");
+            System.out.println(ConsoleColors.SUCCESS + "       Pokédex saved successfully!"
+                + ConsoleColors.DEFAULT);
             System.out.println("----------------------------------------\n");
         } catch (IOException e){
             System.out.println("----------------------------------------");
-            System.out.println("     Could not save the Pokédex!");
+            System.out.println(ConsoleColors.WARNING + "     Could not save the Pokédex!"
+                + ConsoleColors.DEFAULT);
             System.out.println("----------------------------------------\n");
         }
     }
@@ -111,12 +114,14 @@ public class PokedexFile {
             }
 
             System.out.println("----------------------------------------");
-            System.out.println("       Pokédex loaded successfully!");
+            System.out.println(ConsoleColors.SUCCESS + "       Pokédex loaded successfully!"
+                + ConsoleColors.DEFAULT);
             System.out.println("----------------------------------------\n");
 
         } catch (IOException e){
             System.out.println("----------------------------------------");
-            System.out.println("       Couldn't load the Pokédex!");
+            System.out.println(ConsoleColors.WARNING + "       Couldn't load the Pokédex!"
+                + ConsoleColors.DEFAULT);
             System.out.println("----------------------------------------\n");
         }
     }

@@ -1,5 +1,7 @@
 package org.example.model;
 
+import org.example.input.ConsoleColors;
+
 public class Attack {
 
     // Namn för attack
@@ -19,22 +21,26 @@ public class Attack {
 
         // Attack namn kan inte vara tom
         if (name == null || name.isBlank()){
-            throw new IllegalArgumentException("\nAttack name cannot be empty!");
+            throw new IllegalArgumentException(ConsoleColors.ERROR + "\nAttack name cannot be empty!" +
+                    ConsoleColors.DEFAULT);
         }
 
         // baseDamage kan inte vara mindre än 0
         if (baseDamage <= 0){
-            throw new IllegalArgumentException("\nBase Damage must be greater than 0.");
+            throw new IllegalArgumentException(ConsoleColors.WARNING + "\nBase Damage must be greater than 0." +
+                    ConsoleColors.DEFAULT);
         }
 
         // Accuracy behöver vara mellan 1 - 100
         if (accuracy < 1 || accuracy > 100){
-            throw new IllegalArgumentException("\nAccuracy must be between 1 - 100");
+            throw new IllegalArgumentException(ConsoleColors.WARNING + "\nAccuracy must be between 1 - 100" +
+                    ConsoleColors.DEFAULT);
         }
 
         // En attack behöver en element
         if (element == null){
-            throw new IllegalArgumentException("\nAn Attack needs an Element!");
+            throw new IllegalArgumentException(ConsoleColors.ERROR + "\nAn Attack needs an Element!" +
+                    ConsoleColors.DEFAULT);
         }
 
         // Sparar den validerade infon i attack-objektet

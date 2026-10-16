@@ -4,6 +4,7 @@ import org.example.BattleLogic.AccuracyCheck;
 import org.example.BattleLogic.AttackExecutor;
 import org.example.BattleLogic.DamageCalculator;
 import org.example.Menu.PlayerAttackSelector;
+import org.example.input.ConsoleColors;
 import org.example.model.Attack;
 import org.example.model.Pokemon;
 import org.example.Battle.BattleHistory;
@@ -91,7 +92,7 @@ public class BattleEngine {
                 // Kontrollera om användarens Pokémon har besegrats
                 if (playerPokemon.getCurrentHp() <= 0){
                     System.out.println("\n------------------------------------\n");
-                    System.out.println("        " + playerPokemon.getName() + " has fainted!");
+                    System.out.println("      " + playerPokemon.getName() + " has fainted!");
                     break;
                 }
             }
@@ -105,12 +106,14 @@ public class BattleEngine {
         System.out.println("           Battle Finished");
 
         if (playerPokemon.getCurrentHp() <= 0) {
-            System.out.println("\n      You have lost the battle!💀");
+            System.out.println(ConsoleColors.ERROR + "\n      You have lost the battle!💀" +
+                    ConsoleColors.DEFAULT);
 
             BattleHistory.saveBattle(playerPokemon, cpuPokemon, "LOSS");
 
         } else if (cpuPokemon.getCurrentHp() <= 0) {
-            System.out.println("\n      You have won the battle!🎉");
+            System.out.println(ConsoleColors.SUCCESS + "\n      You have won the battle!🎉" +
+                    ConsoleColors.DEFAULT);
 
             BattleHistory.saveBattle(playerPokemon, cpuPokemon, "WIN");
         }

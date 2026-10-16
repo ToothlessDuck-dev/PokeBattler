@@ -1,9 +1,11 @@
 package org.example.pokedex;
 
+import org.example.input.ConsoleColors;
 import org.example.input.InputHelper;
 import org.example.model.Pokemon;
 
 import java.util.Scanner;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class DeletePokemon {
 
@@ -13,8 +15,8 @@ public class DeletePokemon {
 
         // Kontrollera att Pokédexet inte är tomt
         if(pokedex.getPokemon().isEmpty()){
-            System.out.println("\nThe Pokédex is empty");
-            System.out.println("Please add a Pokémon.\n");
+            System.out.println(ConsoleColors.WARNING + "\nThe Pokédex is empty" + ConsoleColors.DEFAULT);
+            System.out.println(ConsoleColors.WARNING + "Please add a Pokémon.\n" + ConsoleColors.DEFAULT);
             return;
         }
 
@@ -26,8 +28,7 @@ public class DeletePokemon {
         }
 
         // Låt användaren välja en Pokémon
-        int choice = InputHelper.readIntBetween(scan,
-                "> Choose a Pokémon to remove from your party: ",
+        int choice = InputHelper.readIntBetween(scan,"> Choose a Pokémon to remove from your party: ",
                 1, pokedex.getPokemon().size());
 
         // Hämntar Pokémonen som användaren har valt

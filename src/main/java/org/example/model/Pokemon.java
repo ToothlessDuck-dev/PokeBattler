@@ -1,5 +1,7 @@
 package org.example.model;
 
+import org.example.input.ConsoleColors;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,22 +27,26 @@ public class Pokemon {
 
         // Pokémon namnet kan inte vara tomt
         if (name == null || name.isBlank()){
-            throw new IllegalArgumentException("\nPokémon name cannot be empty!");
+            throw new IllegalArgumentException(ConsoleColors.ERROR + "\nPokémon name cannot be empty!" +
+                    ConsoleColors.DEFAULT);
         }
 
         // maxHp kan inte vara mindre än 0
         if (maxHp <= 0){
-            throw new IllegalArgumentException("\nThe Max HP must be greater than 0!");
+            throw new IllegalArgumentException(ConsoleColors.ERROR + "\nThe Max HP must be greater than 0!" +
+                    ConsoleColors.DEFAULT);
         }
 
         // currentHp kan inte vara negativt
         if (currentHp < 0){
-            throw new IllegalArgumentException("\nThe Current HP cannot be negative!");
+            throw new IllegalArgumentException(ConsoleColors.ERROR + "\nThe Current HP cannot be negative!" +
+                    ConsoleColors.DEFAULT);
         }
 
         // currentHp kan inte vara högre än maxHp
         if (currentHp > maxHp){
-            throw new IllegalArgumentException("\nThe Current HP cannot be higher than the Max HP.");
+            throw new IllegalArgumentException(ConsoleColors.ERROR + "\nThe Current HP cannot be higher than the Max HP." +
+                    ConsoleColors.DEFAULT);
         }
 
         this.name = name;
@@ -60,7 +66,8 @@ public class Pokemon {
 
         // Pokemon namn kan inte vara tomt
         if (name == null || name.isBlank()){
-            throw new IllegalArgumentException("\nPokémon name cannot be empty!");
+            throw new IllegalArgumentException(ConsoleColors.ERROR + "\nPokémon name cannot be empty!" +
+                    ConsoleColors.DEFAULT);
         }
         this.name = name;
     }
@@ -81,7 +88,8 @@ public class Pokemon {
 
         // Max HP kan inte vara mindre än 0
         if (maxHp <= 0){
-            throw new IllegalArgumentException("\nMax HP must be greater than 0!");
+            throw new IllegalArgumentException(ConsoleColors.ERROR + "\nMax HP must be greater than 0!" +
+                    ConsoleColors.DEFAULT);
         }
         this.maxHp = maxHp;
     }
@@ -94,12 +102,14 @@ public class Pokemon {
 
         // Current HP kan inte vara negativt
         if (currentHp < 0){
-            throw new IllegalArgumentException("\nThe Current HP cannot be negative!");
+            throw new IllegalArgumentException(ConsoleColors.ERROR + "\nThe Current HP cannot be negative!" +
+                    ConsoleColors.DEFAULT);
         }
 
         // Current HP kan inte vara högre än Max HP
         if (currentHp > maxHp){
-            throw new IllegalArgumentException("\nThe Current HP cannot be higher than Max HP!");
+            throw new IllegalArgumentException(ConsoleColors.ERROR + "\nThe Current HP cannot be higher than Max HP!" +
+                    ConsoleColors.DEFAULT);
         }
         this.currentHp = currentHp;
     }
@@ -112,11 +122,12 @@ public class Pokemon {
     public void addAttack(Attack attack){
         //Pokémon max 4 attacker
         if (attacks.size() >= 4){
-            throw new IllegalArgumentException("\nA Pokémon cannot have more than 4 attacks!");
+            throw new IllegalArgumentException(ConsoleColors.WARNING + "\nA Pokémon cannot have more than 4 attacks!" +
+                ConsoleColors.DEFAULT);
         }
         // Pokémon ingen tom attack
         if (attack == null){
-            throw new IllegalArgumentException("\nAttack cannot be empty!");
+            throw new IllegalArgumentException(ConsoleColors.ERROR + "\nAttack cannot be empty!" + ConsoleColors.DEFAULT);
         }
         attacks.add(attack);
     }
@@ -125,8 +136,8 @@ public class Pokemon {
 
         // En Pokémon måste alltid ha minst 1 attack
         if(attacks.size() <= 1){
-            throw new IllegalArgumentException(
-                    "\nA Pokémon must have at least 1 attack!");
+            throw new IllegalArgumentException(ConsoleColors.ERROR +
+                    "\nA Pokémon must have at least 1 attack!" + ConsoleColors.DEFAULT);
         }
 
         attacks.remove(attack);

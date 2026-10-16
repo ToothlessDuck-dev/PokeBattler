@@ -1,5 +1,6 @@
 package org.example.Menu;
 
+import org.example.input.ConsoleColors;
 import org.example.input.InputHelper;
 import org.example.model.Pokemon;
 import org.example.pokedex.Pokedex;
@@ -13,7 +14,7 @@ public class PokemonHealer {
 
         // Kontrollera att Pokédexet inte är tomt
         if (pokedex.getPokemon().isEmpty()) {
-            System.out.println("\nYou have no Pokémon to heal!");
+            System.out.println(ConsoleColors.WARNING + "\nYou have no Pokémon to heal!\n" + ConsoleColors.DEFAULT);
             return;
         }
 
@@ -39,17 +40,17 @@ public class PokemonHealer {
 
         // Kontrollera om Pokémonen redan har full HP
         if (chosenPokemon.getCurrentHp() == chosenPokemon.getMaxHp()) {
-            System.out.println("\n" + chosenPokemon.getName() +
-                    " already has full HP!");
+            System.out.println("\n" + chosenPokemon.getName() + ConsoleColors.WARNING +
+                    " already has full HP!" + ConsoleColors.DEFAULT);
         } else {
             // återställer Pokémons HP till dess Maxvärde
             chosenPokemon.setCurrentHp(chosenPokemon.getMaxHp());
 
             // Bekräfta att Pokémonen har läkts
-            System.out.println("\n" + chosenPokemon.getName() +
-                    " has been fully healed!");
-            System.out.println("\nHP: " + chosenPokemon.getCurrentHp() +
-                    "/" + chosenPokemon.getMaxHp());
+            System.out.println("\n" + chosenPokemon.getName() + ConsoleColors.SUCCESS +
+                    " has been fully healed!" + ConsoleColors.DEFAULT);
+            System.out.println(ConsoleColors.SUCCESS + "\nHP: " + chosenPokemon.getCurrentHp() +
+                    "/" + chosenPokemon.getMaxHp() + ConsoleColors.DEFAULT + "\n");
         }
     }
 }

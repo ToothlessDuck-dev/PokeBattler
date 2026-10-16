@@ -1,5 +1,6 @@
 package org.example.BattleLogic;
 
+import org.example.input.ConsoleColors;
 import org.example.model.Attack;
 import org.example.model.Pokemon;
 

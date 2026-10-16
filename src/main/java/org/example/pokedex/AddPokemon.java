@@ -1,5 +1,7 @@
 package org.example.pokedex;
 
+import jdk.jshell.spi.ExecutionControl;
+import org.example.input.ConsoleColors;
 import org.example.input.InputHelper;
 import org.example.model.Attack;
 import org.example.model.Element;
@@ -20,7 +22,8 @@ public class AddPokemon {
             name = scan.nextLine();
 
             if (name.isBlank()){
-                System.out.println("\nName cannot be empty, try again.\n");
+                System.out.println(ConsoleColors.WARNING + "\nName cannot be empty, try again.\n" +
+                        ConsoleColors.DEFAULT);
             } else {
                 break;
             }
@@ -36,8 +39,8 @@ public class AddPokemon {
                 element = Element.valueOf(chosenElement.toUpperCase());
                 break;
             } catch (IllegalArgumentException e) {
-                System.out.println("\nInvalid Element, try again.");
-                System.out.println("Choose between: " +
+                System.out.println(ConsoleColors.ERROR + "\nInvalid Element, try again." + ConsoleColors.DEFAULT);
+                System.out.println(ConsoleColors.WARNING + "Choose between: " + ConsoleColors.DEFAULT +
                         "\u001B[34mWATER\u001B[0m, " +
                         "\u001B[31mFIRE\u001B[0m, " +
                         "\u001B[32mGRASS\u001B[0m, " +
@@ -67,7 +70,7 @@ public class AddPokemon {
             Attack attack = AddAttack.create(scan);
             pokemon.addAttack(attack);
             System.out.println("\n----------------------------------------");
-            System.out.println("             Attack added!");
+            System.out.println(ConsoleColors.SUCCESS + "             Attack added!" + ConsoleColors.DEFAULT);
             System.out.println("----------------------------------------");
 
             // Frågar om användaren vill lägga till en till attack
@@ -82,7 +85,8 @@ public class AddPokemon {
         pokedex.addPokemon(pokemon);
 
         System.out.println("\n----------------------------------------");
-        System.out.println("     " + pokemon.getName() + " was added to the Pokédex!");
+        System.out.println(ConsoleColors.SUCCESS + "     " + pokemon.getName() + " was added to the Pokédex!" +
+                ConsoleColors.DEFAULT);
         System.out.println("----------------------------------------\n");
     }
 }
