@@ -20,7 +20,7 @@ public class AddPokemon {
             name = scan.nextLine();
 
             if (name.isBlank()){
-                System.out.println("\n\u001B[31mName cannot be empty, try again.\n\u001B[0m");
+                System.out.println("\nName cannot be empty, try again.\n");
             } else {
                 break;
             }
@@ -36,8 +36,8 @@ public class AddPokemon {
                 element = Element.valueOf(chosenElement.toUpperCase());
                 break;
             } catch (IllegalArgumentException e) {
-                System.out.println("\n\u001B[31mInvalid Element, try again.\u001B[0m");
-                System.out.println("\u001B[31mChoose between: " +
+                System.out.println("\nInvalid Element, try again.");
+                System.out.println("Choose between: " +
                         "\u001B[34mWATER\u001B[0m, " +
                         "\u001B[31mFIRE\u001B[0m, " +
                         "\u001B[32mGRASS\u001B[0m, " +
@@ -66,18 +66,23 @@ public class AddPokemon {
 
             Attack attack = AddAttack.create(scan);
             pokemon.addAttack(attack);
-            System.out.println("\nAttack added!");
+            System.out.println("\n----------------------------------------");
+            System.out.println("             Attack added!");
+            System.out.println("----------------------------------------");
 
             // Frågar om användaren vill lägga till en till attack
             if (pokemon.getAttacks().size() < 4){
                 addAnotherAttack = InputHelper.readYesNo(
-                        scan, "\nAdd another attack? [YES] | [NO]: ");
+                        scan, "\n> Add another attack? [YES] | [NO]: ");
 
             }
         }
 
         // Lägger till Pokémon i Pokédexet
         pokedex.addPokemon(pokemon);
-        System.out.println("\n" + pokemon.getName() + " was added to the Pokédex!");
+
+        System.out.println("\n----------------------------------------");
+        System.out.println("     " + pokemon.getName() + " was added to the Pokédex!");
+        System.out.println("----------------------------------------\n");
     }
 }

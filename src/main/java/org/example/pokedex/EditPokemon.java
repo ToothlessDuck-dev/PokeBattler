@@ -15,8 +15,8 @@ public class EditPokemon {
 
         // Kontrollera att Pokédex inte är tomt
         if(pokedex.getPokemon().isEmpty()){
-            System.out.println("\n\u001B[33mThe Pokédex is empty...\u001B[0m");
-            System.out.println("\u001B[33mPlease add a Pokémon.\u001B[0m");
+            System.out.println("\nThe Pokédex is empty");
+            System.out.println("Please add a Pokémon.\n");
             return;
         }
 
@@ -34,9 +34,9 @@ public class EditPokemon {
 
         Pokemon selectedPokemon = pokedex.getPokemon().get(choice - 1);
 
-        System.out.println("\nEditing: " + selectedPokemon.getName());
+        System.out.println("\n>>> Editing: " + selectedPokemon.getName() + " <<<");
 
-        System.out.println("\n[1] Change Name");
+        System.out.println("[1] Change Name");
         System.out.println("[2] Change HP");
         System.out.println("[3] Change Element");
         System.out.println("[4] Add Attack");
@@ -54,12 +54,14 @@ public class EditPokemon {
                 String newName = scan.nextLine();
 
                 if (newName.isBlank()){
-                    System.out.println("\n\u001B[33mName cannot be empty.\u001B[0m");
+                    System.out.println("Name cannot be empty.");
                     break;
                 }
 
                 selectedPokemon.setName(newName);
-                System.out.println("\nPokémon name changed to: " + newName);
+                System.out.println("\n----------------------------------------");
+                System.out.println("     Pokémon name changed to: " + newName);
+                System.out.println("----------------------------------------\n");
                 break;
 
             case 2:
@@ -68,13 +70,15 @@ public class EditPokemon {
                         1, 100);
 
                 int newCurrentHp = InputHelper.readIntBetween(scan,
-                        "\nNew Current HP: ",
+                        "New Current HP: ",
                         0, newMaxHp);
 
                 selectedPokemon.setMaxHp(newMaxHp);
                 selectedPokemon.setCurrentHp(newCurrentHp);
 
-                System.out.print("\nPokémon HP changed!\n");
+                System.out.println("\n----------------------------------------");
+                System.out.println("          Pokémon HP changed!");
+                System.out.println("----------------------------------------\n");
                 break;
 
             case 3:
@@ -86,16 +90,18 @@ public class EditPokemon {
                         Element newElement = Element.valueOf(newElementInput.toUpperCase());
                         selectedPokemon.setElement(newElement);
 
-                        System.out.println("\nPokémon Element changed to: " + newElement);
+                        System.out.println("\n----------------------------------------");
+                        System.out.println("   Pokémon Element changed to: " + newElement);
+                        System.out.println("----------------------------------------\n");
                         break;
                     } catch (IllegalArgumentException e) {
-                        System.out.println("\n\u001B[31mInvalid Element, try again.\u001B[0m");
+                        System.out.println("\nInvalid Element, try again.");
                         System.out.println("\u001B[31mChoose between: " +
                                 "\u001B[34mWATER\u001B[0m, " +
                                 "\u001B[31mFIRE\u001B[0m, " +
                                 "\u001B[32mGRASS\u001B[0m, " +
                                 "\u001B[33mELECTRIC\u001B[0m " +
-                                "& \u001B[97mNORMAL.\n\u001B[0m");
+                                "& \u001B[97mNORMAL.\u001B[0m");
                     }
                 }
                 break;
@@ -104,7 +110,7 @@ public class EditPokemon {
 
                 // Kontrollera att Pokémon redan har 4 attacker
                 if (selectedPokemon.getAttacks().size() >= 4){
-                    System.out.println("\n\u001B[33mThis Pokémon already has 4 attacks!\n\u001B[0m");
+                    System.out.println("\nThis Pokémon already has 4 attacks!");
                     break;
                 }
 
@@ -113,18 +119,21 @@ public class EditPokemon {
                 Attack attack = AddAttack.create(scan);
                 selectedPokemon.addAttack(attack);
 
-                System.out.println("\nAttack added!");
+                System.out.println("\n----------------------------------------");
+                System.out.println("              " +
+                        "Attack added!");
+                System.out.println("----------------------------------------\n");
                 break;
 
             case 5:
 
                 // Kontrollera att Pokémon har attacker
                 if (selectedPokemon.getAttacks().size() <= 1){
-                    System.out.println("\n\u001B[33mThis Pokémon must have at least 1 attack.\u001B[0m");
+                    System.out.println("\nThis Pokémon must have at least 1 attack.\n");
                     break;
                 }
 
-                System.out.println("\n=== Remove an attack");
+                System.out.println("\n=== Remove an attack ===");
 
                 // Visa Pokémons attacker
                 for(int i = 0; i < selectedPokemon.getAttacks().size(); i++){
@@ -142,24 +151,29 @@ public class EditPokemon {
                 Attack selectedAttack = selectedPokemon.getAttacks().get(attackChoice - 1);
 
                 boolean confirm = InputHelper.readYesNo(scan,
-                        "\nAre you sure you want to remove " +
+                        "\n> Are you sure you want to remove " +
                         selectedAttack.getName() +
                         "? [YES] | [NO]: ");
 
                 // Ta bort attacken
                 if(confirm){
                     selectedPokemon.removeAttack(selectedAttack);
-                    System.out.println("\n" + selectedPokemon.getName() +
+                    System.out.println("\n----------------------------------------");
+                    System.out.println(" " + selectedPokemon.getName() +
                             " has forgotten how to use " +
                             selectedAttack.getName() + ".");
+                    System.out.println("----------------------------------------\n");
                 } else {
-                    System.out.println("\n" + selectedPokemon.getName() +
+                    System.out.println("\n----------------------------------------");
+                    System.out.println("  " + selectedPokemon.getName() +
                             " stays strong knowing " +
                             selectedAttack.getName() + ".");
+                    System.out.println("----------------------------------------\n");
                 }
                 break;
 
             case 6:
+                System.out.println("");
                 break;
         }
     }

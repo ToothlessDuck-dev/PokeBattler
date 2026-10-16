@@ -25,22 +25,22 @@ public class Pokemon {
 
         // Pokémon namnet kan inte vara tomt
         if (name == null || name.isBlank()){
-            throw new IllegalArgumentException("\n\u001B[31mPokémon name cannot be empty!\u001B[0m");
+            throw new IllegalArgumentException("\nPokémon name cannot be empty!");
         }
 
         // maxHp kan inte vara mindre än 0
         if (maxHp <= 0){
-            throw new IllegalArgumentException("\n\u001B[31mThe Max HP must be greater than 0!\u001B[0m");
+            throw new IllegalArgumentException("\nThe Max HP must be greater than 0!");
         }
 
         // currentHp kan inte vara negativt
         if (currentHp < 0){
-            throw new IllegalArgumentException("\n\u001B[31mThe Current HP cannot be negative!\u001B[0m");
+            throw new IllegalArgumentException("\nThe Current HP cannot be negative!");
         }
 
         // currentHp kan inte vara högre än maxHp
         if (currentHp > maxHp){
-            throw new IllegalArgumentException("\n\u001B[31mThe Current HP cannot be higher than the Max HP.\u001B[0m");
+            throw new IllegalArgumentException("\nThe Current HP cannot be higher than the Max HP.");
         }
 
         this.name = name;
@@ -60,7 +60,7 @@ public class Pokemon {
 
         // Pokemon namn kan inte vara tomt
         if (name == null || name.isBlank()){
-            throw new IllegalArgumentException("\n\u001B[31mPokémon name cannot be empty!\u001b[0m");
+            throw new IllegalArgumentException("\nPokémon name cannot be empty!");
         }
         this.name = name;
     }
@@ -81,7 +81,7 @@ public class Pokemon {
 
         // Max HP kan inte vara mindre än 0
         if (maxHp <= 0){
-            throw new IllegalArgumentException("\n\u001B[31mMax HP must be greater than 0!\u001B[0m");
+            throw new IllegalArgumentException("\nMax HP must be greater than 0!");
         }
         this.maxHp = maxHp;
     }
@@ -94,12 +94,12 @@ public class Pokemon {
 
         // Current HP kan inte vara negativt
         if (currentHp < 0){
-            throw new IllegalArgumentException("\n\u001B[31mThe Current HP cannot be negative!\u001B[0m");
+            throw new IllegalArgumentException("\nThe Current HP cannot be negative!");
         }
 
         // Current HP kan inte vara högre än Max HP
         if (currentHp > maxHp){
-            throw new IllegalArgumentException("\n\u001B[31mThe Current HP cannot be higher than Max HP!\u001B[0m");
+            throw new IllegalArgumentException("\nThe Current HP cannot be higher than Max HP!");
         }
         this.currentHp = currentHp;
     }
@@ -112,11 +112,11 @@ public class Pokemon {
     public void addAttack(Attack attack){
         //Pokémon max 4 attacker
         if (attacks.size() >= 4){
-            throw new IllegalArgumentException("\n\u001B[31mA Pokémon cannot have more than 4 attacks!\u001B[0m");
+            throw new IllegalArgumentException("\nA Pokémon cannot have more than 4 attacks!");
         }
         // Pokémon ingen tom attack
         if (attack == null){
-            throw new IllegalArgumentException("\n\u001B[31mAttack cannot be empty!\u001B[0m");
+            throw new IllegalArgumentException("\nAttack cannot be empty!");
         }
         attacks.add(attack);
     }
@@ -126,7 +126,7 @@ public class Pokemon {
         // En Pokémon måste alltid ha minst 1 attack
         if(attacks.size() <= 1){
             throw new IllegalArgumentException(
-                    "\n\u001B[33mA Pokémon must have at least 1 attack!\u001B[0m");
+                    "\nA Pokémon must have at least 1 attack!");
         }
 
         attacks.remove(attack);

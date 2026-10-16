@@ -18,7 +18,7 @@ public class AddAttack {
             attackName = scan.nextLine();
 
             if (attackName.isBlank()) {
-                System.out.println("\n\u001B[33mAttack Name cannot be empty. Try again.\u001B[0m");
+                System.out.println("\nAttack Name cannot be empty. Try again.");
             } else {
                 break;
             }
@@ -43,8 +43,8 @@ public class AddAttack {
                 attackElement = Element.valueOf(attackElementInput.toUpperCase());
                 break;
             } catch (IllegalArgumentException e) {
-                System.out.println("\n\u001B[31mInvalid Element, try again.\u001B[0m");
-                System.out.println("\u001B[31mChoose between: " +
+                System.out.println("\nInvalid Element, try again.");
+                System.out.println("Choose between: " +
                         "\u001B[34mWATER\u001B[0m, " +
                         "\u001B[31mFIRE\u001B[0m, " +
                         "\u001B[32mGRASS\u001B[0m, " +

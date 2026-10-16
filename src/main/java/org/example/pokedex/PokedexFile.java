@@ -40,9 +40,13 @@ public class PokedexFile {
                         "===================================\n");
             }
 
-            System.out.println("\nPokédex saved successfully!");
+            System.out.println("----------------------------------------");
+            System.out.println("       Pokédex saved successfully!");
+            System.out.println("----------------------------------------\n");
         } catch (IOException e){
-            System.out.println("\nCould not save the Pokédex!");
+            System.out.println("----------------------------------------");
+            System.out.println("     Could not save the Pokédex!");
+            System.out.println("----------------------------------------\n");
         }
     }
 
@@ -106,10 +110,14 @@ public class PokedexFile {
                 }
             }
 
-            System.out.println("\nPokédex loaded successfully!");
+            System.out.println("----------------------------------------");
+            System.out.println("       Pokédex loaded successfully!");
+            System.out.println("----------------------------------------\n");
 
         } catch (IOException e){
-            System.out.println("\nCouldn't load the Pokédex!");
+            System.out.println("----------------------------------------");
+            System.out.println("       Couldn't load the Pokédex!");
+            System.out.println("----------------------------------------\n");
         }
     }
 }

@@ -13,7 +13,7 @@ public class PokemonHealer {
 
         // Kontrollera att Pokédexet inte är tomt
         if (pokedex.getPokemon().isEmpty()) {
-            System.out.println("\n\u001B[33mYou have no Pokémon to heal!\u001B[0m");
+            System.out.println("\nYou have no Pokémon to heal!");
             return;
         }
 
@@ -31,7 +31,7 @@ public class PokemonHealer {
         }
 
         // Låter användaren välja en Pokémon
-        int choice = InputHelper.readIntBetween(scan, "\n> Choose a Pokémon to heal: ",
+        int choice = InputHelper.readIntBetween(scan, "> Choose a Pokémon to heal: ",
                 1, pokedex.getPokemon().size());
 
         // Hämntar den valda Pokémonen
@@ -40,7 +40,7 @@ public class PokemonHealer {
         // Kontrollera om Pokémonen redan har full HP
         if (chosenPokemon.getCurrentHp() == chosenPokemon.getMaxHp()) {
             System.out.println("\n" + chosenPokemon.getName() +
-                    " \u001B[33malready has full HP!\u001B[0m");
+                    " already has full HP!");
         } else {
             // återställer Pokémons HP till dess Maxvärde
             chosenPokemon.setCurrentHp(chosenPokemon.getMaxHp());

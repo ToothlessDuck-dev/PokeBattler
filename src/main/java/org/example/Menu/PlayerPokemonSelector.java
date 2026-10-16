@@ -11,7 +11,7 @@ public class PlayerPokemonSelector {
     // Låter spelaren vâlja en Pokémon som kan delta i striden
     public Pokemon choosePokemon(Scanner scan, Pokedex pokedex) {
 
-        System.out.println("\nChoose your Pokémon:");
+        System.out.println("\n>>> Choose your Pokémon <<<");
 
         // Går igenom alla Pokémon i Pokédexet
         for (int i = 0; i < pokedex.getPokemon().size(); i++) {
@@ -28,13 +28,13 @@ public class PlayerPokemonSelector {
         // Fortsätter fråga tills spelaren har valt en giltig Pokémon
         while (true) {
             int choice = InputHelper.readIntBetween(scan,
-                    "\n> Choose your Pokémon: ",
+                    "> Pokémon chosen: ",
                     1, pokedex.getPokemon().size());
 
             Pokemon chosenPokemon = pokedex.getPokemon().get(choice - 1);
 
             if (chosenPokemon.getCurrentHp() <= 0) {
-                System.out.println("\n\u001B[33mThis Pokémon had fainted! Choose a different one.\u001b[0m");
+                System.out.println("\nThis Pokémon had fainted! Choose a different one.");
             } else {
                 return chosenPokemon;
             }

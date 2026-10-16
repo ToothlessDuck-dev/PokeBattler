@@ -49,7 +49,7 @@ public class BattleEngine {
 
         System.out.println("\n====================================");
         System.out.println("           BATTLE STARTED");
-        System.out.println("     " + playerPokemon.getName() +
+        System.out.println("      " + playerPokemon.getName() +
                 " vs " + cpuPokemon.getName());
         System.out.println("====================================");
 
@@ -61,7 +61,7 @@ public class BattleEngine {
 
             if (playerTurn){
                 //spelarens tur
-                System.out.println("\n---------- YOUR TURN ----------");
+                System.out.println("\n------------ YOUR TURN -------------");
 
                 Attack playerAttack = playerAttackSelector.chooseAttack(scan, playerPokemon);
 
@@ -69,18 +69,19 @@ public class BattleEngine {
                         playerPokemon, cpuPokemon, playerAttack);
 
                 if(cpuPokemon.getCurrentHp() <= 0){
-                    System.out.println("\n" + cpuPokemon.getName() + " has fainted!");
+                    System.out.println("\n------------------------------------\n");
+                    System.out.println("     " + cpuPokemon.getName() + " has fainted!");
                     break;
                 }
             } else {
                 // CPU:ns tur
-                System.out.println("\n------- OPPONENT'S TURN -------");
+                System.out.println("\n---------- OPPONENT'S TURN ---------");
 
                 Attack cpuAttack = cpuStrategy.chooseAttack(cpuPokemon);
 
                 if (cpuAttack == null){
                     System.out.println("\n" + cpuPokemon.getName() +
-                            " \n\u001B[33mhas no attacks and cannot continue the battle.\u001B[0m");
+                            " \nhas no attacks and cannot continue the battle.");
                     break;
                 }
 
@@ -89,7 +90,8 @@ public class BattleEngine {
 
                 // Kontrollera om användarens Pokémon har besegrats
                 if (playerPokemon.getCurrentHp() <= 0){
-                    System.out.println("\n" + playerPokemon.getName() + " has fainted!");
+                    System.out.println("\n------------------------------------\n");
+                    System.out.println("        " + playerPokemon.getName() + " has fainted!");
                     break;
                 }
             }
@@ -100,7 +102,7 @@ public class BattleEngine {
 
         // Visar och sparar resultatet av striden
         System.out.println("\n====================================");
-        System.out.println("          Battle Finished");
+        System.out.println("           Battle Finished");
 
         if (playerPokemon.getCurrentHp() <= 0) {
             System.out.println("\n      You have lost the battle!💀");

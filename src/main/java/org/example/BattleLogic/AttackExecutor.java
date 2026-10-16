@@ -10,7 +10,7 @@ public class AttackExecutor {
             Pokemon attacker, Pokemon defender, Attack attack){
 
         // Visar vilken attack som används
-        System.out.println(
+        System.out.println("\n" +
                 attacker.getName() +
                 " used " +
                 attack.getName() + "!");

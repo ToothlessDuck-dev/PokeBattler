@@ -19,22 +19,22 @@ public class Attack {
 
         // Attack namn kan inte vara tom
         if (name == null || name.isBlank()){
-            throw new IllegalArgumentException("\n\u001B[33mAttack name cannot be empty!\u001B[0m");
+            throw new IllegalArgumentException("\nAttack name cannot be empty!");
         }
 
         // baseDamage kan inte vara mindre än 0
         if (baseDamage <= 0){
-            throw new IllegalArgumentException("\n\u001B[33mBase Damage must be greater than 0.\u001B[0m");
+            throw new IllegalArgumentException("\nBase Damage must be greater than 0.");
         }
 
         // Accuracy behöver vara mellan 1 - 100
         if (accuracy < 1 || accuracy > 100){
-            throw new IllegalArgumentException("\n\u001B[33mAccuracy must be between 1 - 100\u001B[0m");
+            throw new IllegalArgumentException("\nAccuracy must be between 1 - 100");
         }
 
         // En attack behöver en element
         if (element == null){
-            throw new IllegalArgumentException("\n\u001B[33mAn Attack needs an Element!\u001B[0m");
+            throw new IllegalArgumentException("\nAn Attack needs an Element!");
         }
 
         // Sparar den validerade infon i attack-objektet

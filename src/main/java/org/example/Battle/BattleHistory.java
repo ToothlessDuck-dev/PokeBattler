@@ -22,7 +22,7 @@ public class BattleHistory {
             String result) {
 
         if (result == null){
-            System.out.println("\n\u001B[33mCould not get battle result information.\u001B[0m");
+            System.out.println("\nCould not get battle result information.");
             return;
         }
 
@@ -51,7 +51,7 @@ public class BattleHistory {
 
                 writer.println("Result: DEFEAT");
             } else {
-                System.out.println("\n\u001B[33mCould not get battle result information.\u001B[0m");
+                System.out.println("\nCould not get battle result information.");
                 return;
             }
 
@@ -96,10 +96,12 @@ public class BattleHistory {
         File file = new File(FILE_NAME);
 
         if (!file.exists() || file.length() == 0) {
-            System.out.println("\n\u001B[33mNo battles have been recorded\u001B[0m");
+            System.out.println("\n------------------------------\n");
+            System.out.println("No battles have been recorded");
             System.out.println("\nTotal battles: 0");
             System.out.println("Wins: 0");
             System.out.println("Losses: 0");
+            System.out.println("\n------------------------------");
             return;
         }
 
@@ -125,7 +127,7 @@ public class BattleHistory {
             System.out.println("Losses: " + losses);
             System.out.println("\n=======================================");
         } catch (IOException e){
-            System.out.println("\n\u001B[33mCould not read the battle statistics.\u001B[0m");
+            System.out.println("\nCould not read the battle statistics.");
         }
     }
 }
